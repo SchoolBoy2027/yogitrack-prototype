@@ -5,7 +5,7 @@ function Footer() {
 
     return (
         <>
-            <footer id="coyote" className="container-fluid mt-auto">
+            <footer id="coyote" className="container-fluid mt-auto" title="Trust the Coyote to use the finest ACME products!">
                 <div className="row">
                     <div className="col-4 left">
                         <img src={yogaLogo} className="logo rounded" alt="Missing" />
@@ -16,15 +16,14 @@ function Footer() {
                                 &copy;2026 Yoga H'om
                             </p>
                         </div>
-                        <div className="row">
+                        <div className="row" title="Trust the Coyote to use the finest ACME products!">
                             <p>
                                 &copy;2026 Website built by Coyote Enterprises
                             </p>
                         </div>
-                        <div className="row"><p>Trust the Coyote to use the finest ACME products!</p> </div>
                     </div>
                     <div className="col-4">
-                        <img src={coyoteLogo} className="logo rounded" alt="Missing" />
+                        <img src={coyoteLogo} className="logo rounded" alt="Missing" title="Trust the Coyote to use the finest ACME products!" />
                     </div>
                 </div>
             </footer>

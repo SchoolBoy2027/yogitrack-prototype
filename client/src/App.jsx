@@ -20,7 +20,7 @@ import classLogo from './assets/General.png'
 function App() {
 
   return (
-    
+
     <div className="row p-5 ms-5 ">
 
       <div className="card col-2 ms-5" title="Customers" >
@@ -28,7 +28,7 @@ function App() {
           <img src={customerLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
-          <a href="#" className="btn btn-dark fw-bold dash-button">Customers</a>
+          <a href="/Customer.html?action=Read" className="btn btn-dark fw-bold dash-button">Customers</a>
         </div>
       </div>
 
@@ -37,7 +37,7 @@ function App() {
           <img src={classLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
-          <a href="#" className="btn btn-dark fw-bold dash-button">Classes</a>
+          <a href="/YogaClass.html?action=Read" className="btn btn-dark fw-bold dash-button">Yoga </a>
         </div>
       </div>
 
@@ -46,7 +46,7 @@ function App() {
           <img src={instructorLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
-          <a href="#" className="btn btn-dark fw-bold dash-button">Instructors</a>
+          <a href="/User.html?action=Read" className="btn btn-dark fw-bold dash-button">Instructors</a>
         </div>
       </div>
 
@@ -55,11 +55,11 @@ function App() {
           <img src={salesLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
-          <a href="#" className="btn btn-dark fw-bold dash-button">Sales</a>
+          <a href="/Sale.html?action=Read" className="btn btn-dark fw-bold dash-button">Sales</a>
         </div>
       </div>
 
-     <div className="card col-2 ms-5" title="Reports" >
+      <div className="card col-2 ms-5" title="Reports" >
         <div class="row">
           <img src={reportsLogo} className="card-img-top" alt="Missing" />
         </div>
@@ -68,7 +68,7 @@ function App() {
         </div>
       </div>
 
-     <div className="card col-2 ms-5 p5" title="Instructor Reports" >
+      <div className="card col-2 ms-5 p5" title="Instructor Reports" >
         <div class="row">
           <img src={instructorReportsLogo} className="card-img-top" alt="Missing" />
         </div>
