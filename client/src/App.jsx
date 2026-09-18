@@ -1,121 +1,85 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import './App.css'
+
+import instructorReportsLogo from './assets/InstructorLogin.png'
+import reportsLogo from './assets/Reports.png'
+import salesLogo from './assets/sales.png'
+import instructorLogo from './assets/background_sunset.png'
+import customerLogo from './assets/Senior.png'
+import classLogo from './assets/General.png'
+
+/*
+        import './App.css'
+           <div className="container-flex">
+          <img src={background} className="base" width="170" height="100vh" alt="" />
+          <img src={seniorLogo} className="card-img-top" alt="Missing" />
+          <img src={generalLogo} className="vite" alt="Vite logo" />
+        </div>
+*/
+
+
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    
+    <div className="row p-5 ms-5 ">
 
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
+      <div className="card col-2 ms-5" title="Customers" >
+        <div class="row">
+          <img src={customerLogo} className="card-img-top" alt="Missing" />
         </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
+        <div className=" row pl-1 pr-1 mb-0">
+          <a href="#" className="btn btn-dark fw-bold dash-button">Customers</a>
         </div>
-      </section>
+      </div>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+      <div className="card col-2 ms-5" title="Classes" >
+        <div class="row">
+          <img src={classLogo} className="card-img-top" alt="Missing" />
+        </div>
+        <div className=" row pl-1 pr-1 mb-0">
+          <a href="#" className="btn btn-dark fw-bold dash-button">Classes</a>
+        </div>
+      </div>
+
+      <div className="card col-2 ms-5" title="Instructors" >
+        <div class="row">
+          <img src={instructorLogo} className="card-img-top" alt="Missing" />
+        </div>
+        <div className=" row pl-1 pr-1 mb-0">
+          <a href="#" className="btn btn-dark fw-bold dash-button">Instructors</a>
+        </div>
+      </div>
+
+      <div className="card col-2 ms-5" title="Sales" >
+        <div class="row">
+          <img src={salesLogo} className="card-img-top" alt="Missing" />
+        </div>
+        <div className=" row pl-1 pr-1 mb-0">
+          <a href="#" className="btn btn-dark fw-bold dash-button">Sales</a>
+        </div>
+      </div>
+
+     <div className="card col-2 ms-5" title="Reports" >
+        <div class="row">
+          <img src={reportsLogo} className="card-img-top" alt="Missing" />
+        </div>
+        <div className=" row pl-1 pr-1 mb-0">
+          <a href="#" className="btn btn-dark fw-bold dash-button">Reports</a>
+        </div>
+      </div>
+
+     <div className="card col-2 ms-5 p5" title="Instructor Reports" >
+        <div class="row">
+          <img src={instructorReportsLogo} className="card-img-top" alt="Missing" />
+        </div>
+        <div className=" row pl-1 pr-1 mb-0">
+          <a href="#" className="btn btn-dark fw-bold dash-button">Instructor Reports</a>
+        </div>
+      </div>
+
+
+    </div>
+
   )
 }
 
