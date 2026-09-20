@@ -28,7 +28,7 @@ function App() {
           <img src={customerLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
-          <a href="/Customer.html?action=Read" className="btn btn-dark fw-bold dash-button">Customers</a>
+          <a href="/Customer/View" className="btn btn-dark fw-bold dash-button">Customers</a>
         </div>
       </div>
 
@@ -37,7 +37,7 @@ function App() {
           <img src={classLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
-          <a href="/YogaClass.html?action=Read" className="btn btn-dark fw-bold dash-button">Yoga </a>
+          <a href="/YogaClass/View" className="btn btn-dark fw-bold dash-button">Yoga </a>
         </div>
       </div>
 
@@ -46,7 +46,7 @@ function App() {
           <img src={instructorLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
-          <a href="/User.html?action=Read" className="btn btn-dark fw-bold dash-button">Instructors</a>
+          <a href="/User/View" className="btn btn-dark fw-bold dash-button">Instructors</a>
         </div>
       </div>
 
@@ -55,7 +55,7 @@ function App() {
           <img src={salesLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
-          <a href="/Sale.html?action=Read" className="btn btn-dark fw-bold dash-button">Sales</a>
+          <a href="/Sale/View" className="btn btn-dark fw-bold dash-button">Sales</a>
         </div>
       </div>
 
@@ -64,7 +64,7 @@ function App() {
           <img src={reportsLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
-          <a href="#" className="btn btn-dark fw-bold dash-button">Reports</a>
+          <a href="/Report/View" className="btn btn-dark fw-bold dash-button">Reports</a>
         </div>
       </div>
 
@@ -73,7 +73,7 @@ function App() {
           <img src={instructorReportsLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
-          <a href="#" className="btn btn-dark fw-bold dash-button">Instructor Reports</a>
+          <a href="InstructorReport/View" className="btn btn-dark fw-bold dash-button">Instructor Reports</a>
         </div>
       </div>
 

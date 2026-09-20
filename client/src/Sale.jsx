@@ -3,7 +3,7 @@
  * @param {*} arrInstructors 
  * @returns 
  */
-function CUDSale(arrInstructors) {
+function CUDSale() {
     {
         return (
             <>

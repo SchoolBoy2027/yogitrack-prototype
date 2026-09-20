@@ -2,13 +2,53 @@
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
+    /*    "version": "0.2.0",
     "configurations": [
+        
         {
+            
             "type": "editor-browser",
             "request": "launch",
             "name": "Open index.html",
-            "url": "file:///c%3A/Users/jrc95/Documents/Fall%202026/Development%20for%20WWW/yogitrack-prototype/client/index.html"
+            "url": "http://localhost:5173/"
+        }
+    ],
+
+    {  
+    */
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Backend",
+            "type": "node",
+            "request": "launch",
+            "program": "${workspaceFolder}/backend/src/server.js",
+            "cwd": "${workspaceFolder}/backend",
+            "envFile": "${workspaceFolder}/backend/.env",
+            "console": "integratedTerminal",
+            "restart": true
+        },
+        {
+            "name": "Client",
+            "type": "node",
+            "request": "launch",
+            "cwd": "${workspaceFolder}/client",
+            "runtimeExecutable": "npm",
+            "runtimeArgs": [
+                "run",
+                "dev"
+            ],
+            "console": "integratedTerminal"
+        }
+    ],
+    "compounds": [
+        {
+            "name": "MERN Stack",
+            "configurations": [
+                "Backend",
+                "Client"
+            ],
+            "stopAll": true
         }
     ]
 }
