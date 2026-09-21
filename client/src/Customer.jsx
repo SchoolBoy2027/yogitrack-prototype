@@ -1,5 +1,61 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
+import React from 'react';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+/**
+ * ViewUser()
+ * @returns List of Users
+ */
+
+function ViewCustomer() {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+
+    fetch("http://localhost:5000/api/customer")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setUsers(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error);
+      });
+
+  }, []);
+
+  return (
+    <>
+      <div className="container-fluid">
+
+        <h1>Users</h1>
+
+
+        <table>
+
+          {users.map((user) => (
+            
+            <tr dataID={user.user_id}>
+              <td>First Name: {user.fname}</td>
+              <td>: {user.lname}</td>
+              <td>Address: {user.address}</td>
+              <td>City: {user.city}</td>
+              <td>State: {user.email}</td>
+              <td>Zip Cox: {user.state}</td>
+              <td>Email: {user.email}</td>
+              <td>Preference: {user.communication_preference}</td>
+            </tr>
+          ))}
+        </table>
+        <h1>end of users</h1>
+      </div>
+    </>
+  );
+}
+
 function CUDCustomer() {
 
     return (

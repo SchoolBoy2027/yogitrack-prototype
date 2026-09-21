@@ -28,10 +28,10 @@ createRoot(document.getElementById('root')).render(
           <Route path="/Customer/:action/:id" element={<Customer />} />
           <Route path="/User/:action" element={<User />} />
           <Route path="/User/:action/:id" element={<User />} />
-          <Route path="/YogaClass/:action" element={<User />} />
-          <Route path="/YogaClass/:action/:id" element={<User />} />
-          <Route path="/Sale/:action" element={<User />} />
-          <Route path="/Sale/:action/:id" element={<User />} />
+          <Route path="/YogaClass/:action" element={<YogaClass />} />
+          <Route path="/YogaClass/:action/:id" element={<YogaClass />} />
+          <Route path="/Sale/:action" element={<Sale />} />
+          <Route path="/Sale/:action/:id" element={<Sale />} />
           <Route path="/" element={<App />} />
         </Routes>
       </BrowserRouter>

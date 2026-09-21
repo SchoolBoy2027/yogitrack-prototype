@@ -1,3 +1,50 @@
+import React from 'react';
+import { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+
+/**
+ * ViewUser()
+ * @returns List of Users
+ */
+
+function ViewUser() {
+
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+
+    fetch("http://localhost:5000/api/user")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        setUsers(data);
+      })
+      .catch((error) => {
+        console.error("Error fetching users:", error);
+      });
+
+  }, []);
+
+  return (
+    <>
+      <div className="container-fluid">
+
+        <h1>Sales</h1>
+
+
+        <table>
+
+          {users.map((sale) => (
+            
+            <tr dataID={user.sale_id}>
+            </tr>
+          ))}
+        </table>
+        <h1>end of Sales</h1>
+      </div>
+    </>
+  );
+}
 /**
  *  AddModifySale(arrInstructors) Form Component used to Add or Modify Classes
  * @param {*} arrInstructors 
