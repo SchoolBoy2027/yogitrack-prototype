@@ -1,1 +1,5 @@
-My First Attempt at a react project for a class.  Everything is scaffolded but that's about it.  
+This application is built for class project using a MERN stack.  
+
+As a long time PhP programmer in an isolated network, these new frameworks are quite frustrating.  
+
+
