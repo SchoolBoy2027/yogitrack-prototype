@@ -9,6 +9,8 @@ import User from './User.jsx'
 import YogaClass from './YogaClass.jsx'
 import Customer from './Customer.jsx'
 import Sale from './Sale.jsx'
+import Login from './Login.jsx'
+
 
 import Footer from './Footer.jsx'
 import Header from './Header.jsx'
@@ -32,10 +34,12 @@ createRoot(document.getElementById('root')).render(
           <Route path="/YogaClass/:action/:id" element={<YogaClass />} />
           <Route path="/Sale/:action" element={<Sale />} />
           <Route path="/Sale/:action/:id" element={<Sale />} />
-          <Route path="/" element={<App />} />
+          <Route path="/Dashboard" element={<App />} />
+          <Route path="/Login" element={<Login />} />
+          <Route path="" element={<Login />} />
         </Routes>
       </BrowserRouter>
-
+      <Footer />
     </StrictMode>
 
   </>

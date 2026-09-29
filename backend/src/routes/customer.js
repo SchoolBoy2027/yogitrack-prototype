@@ -16,11 +16,11 @@ router.get("/", async (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-    res.json({ message: `Get user ${req.params.id}` });
+  res.json({ message: `Get user ${req.params.id}` });
 });
 
 router.post("/", (req, res) => {
-    res.json({ message: "Create user" });
+  res.json({ message: "Create user" });
 });
 
 module.exports = router;

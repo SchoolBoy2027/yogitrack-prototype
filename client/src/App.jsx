@@ -76,8 +76,6 @@ function App() {
           <a href="InstructorReport/View" className="btn btn-dark fw-bold dash-button">Instructor Reports</a>
         </div>
       </div>
-
-
     </div>
 
   )

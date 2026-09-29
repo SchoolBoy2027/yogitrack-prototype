@@ -1,3 +1,5 @@
+
+
 :root {
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;
@@ -38,9 +40,20 @@ footer {
 }
 
 .logo {
-  height: 75px;
-  width: 75px;
+  height: 50px;
+  width: 50px;
 
+}
+
+table {
+  width: 100%;
+}
+
+table thead th {
+  background-color:steelblue;
+  color:whitesmoke;
+  text-align: center;
+  border: 1px;
 }
 
 .card {
@@ -54,13 +67,31 @@ footer {
   }
 }
 
-.logo{
-  background-image:url('./assets/CoyoteIcon.png');
+.editButton {
   background-position: center;
-  background-size:75px 75px ;
-  width:75px;
-  height:75px;
+  background-size: 50px 50px;
+  width: 50px;
+  height: 50px;
 }
+
+
+.loginLogo {
+  background-image: url('./assets/PadlockFancy.png');
+  background-position: center;
+  background-size: 75px 75px;
+  width: 75px;
+  height: 75px;
+}
+
+.logo {
+  background-image: url('./assets/CoyoteIcon.png');
+  background-position: center;
+  background-size: 75px 75px;
+  width: 75px;
+  height: 75px;
+}
+
+
 
 #addModify {
   width: 50%;
@@ -86,7 +117,19 @@ footer {
   border-color: black;
   border-width: 10px;
   justify-self: center;
-  color:white;
+  color: white;
+}
+
+.loginForm {
+  display: block;
+  width: 600px;
+  border: solid;
+  border-color: black;
+  border-width: 10px;
+  align-content: center;
+  float:center;
+  color: white;
+  
 }
 
 .formLabel {

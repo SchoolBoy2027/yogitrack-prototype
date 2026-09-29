@@ -8,7 +8,6 @@ function Footer() {
             <footer id="coyote" className="container-fluid mt-auto" title="Trust the Coyote to use the finest ACME products!">
                 <div className="row">
                     <div className="col-4 left">
-                        <img src={yogaLogo} className="logo rounded" alt="Missing" />
                     </div>
                     <div className="col-4 center">
                         <div className="row">

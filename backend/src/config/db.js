@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 //const dotenv = require(".env");
 //todo fix this 
 //MONGO_URI='mongodb+srv://johnrcox1_db_user:bLN9lSwVDD3VySIk@cluster0.i4qpc1f.mongodb.net/'
-MONGO_URI='mongodb://localhost:27017/'
+MONGO_URI = 'mongodb://localhost:27017/yogitrack'
 
 const connectDB = async () => {
     try {
