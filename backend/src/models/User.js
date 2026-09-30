@@ -8,7 +8,8 @@ const userSchema = new mongoose.Schema(
       unique:true
     },
     role:{
-      type:String //array('Manager,Instructor'),
+      type:String,
+      required:true 
     },
     fname: {
       type: String,

@@ -10,7 +10,7 @@ const yogaClassSchema = new mongoose.Schema(
     },
 
     type: {
-      type: array('Senior,General'),
+      class_type: String,
       required: true,
     },
     class_date: {
@@ -21,6 +21,11 @@ const yogaClassSchema = new mongoose.Schema(
       type: string,
       required: true,
     },
+    instructor_name: {
+      type: string,
+      required: false,
+    },
+    
     start_time: {
       type: time,
       required: true,

@@ -24,7 +24,7 @@ function App() {
     <div className="row p-5 ms-5 ">
 
       <div className="card col-2 ms-5" title="Customers" >
-        <div class="row">
+        <div className="row">
           <img src={customerLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
@@ -33,7 +33,7 @@ function App() {
       </div>
 
       <div className="card col-2 ms-5" title="Classes" >
-        <div class="row">
+        <div className="row">
           <img src={classLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
@@ -42,7 +42,7 @@ function App() {
       </div>
 
       <div className="card col-2 ms-5" title="Instructors" >
-        <div class="row">
+        <div className="row">
           <img src={instructorLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
@@ -51,7 +51,7 @@ function App() {
       </div>
 
       <div className="card col-2 ms-5" title="Sales" >
-        <div class="row">
+        <div className="row">
           <img src={salesLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
@@ -60,7 +60,7 @@ function App() {
       </div>
 
       <div className="card col-2 ms-5" title="Reports" >
-        <div class="row">
+        <div className="row">
           <img src={reportsLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">
@@ -69,7 +69,7 @@ function App() {
       </div>
 
       <div className="card col-2 ms-5 p5" title="Instructor Reports" >
-        <div class="row">
+        <div className="row">
           <img src={instructorReportsLogo} className="card-img-top" alt="Missing" />
         </div>
         <div className=" row pl-1 pr-1 mb-0">

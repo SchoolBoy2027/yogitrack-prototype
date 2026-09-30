@@ -5,30 +5,18 @@ const User = require("../models/User");
 console.log("USER ROUTES LOADED");
 
 router.get("/", async (req, res) => {
-   try {
-      console.log("Finding users....");
-      const users = await User.find();
-      console.log("Users found:", users.length);
-      console.log("Users:", users);
-      res.json(users);
-   }
-   catch (error) {
-      res.status(500).json({ message: error.message });
-      console.error("Error finding users:", error);
-   }
+    try {
+        console.log("Finding users....");
+        const users = await User.find();
+        console.log("Users found:", users.length);
+        console.log("Users:", users);
+        res.json(users);
+    }
+    catch (error) {
+        res.status(500).json({ message: error.message });
+        console.error("Error finding users:", error);
+    }
 });
-/*
-router.get("/:id", async (req, res) => {
-   try {
-      const user = await User.fint.findById(req.params.id);
-      res.json(user);
-   }
-   catch (error) {
-      res.status(500).json({ message: error.message });
-          console.error("Error finding users:", error);
-   }
-});
-*/
 
 
 router.get("/:id", async (req, res) => {
@@ -70,4 +58,59 @@ router.post("/", async (req, res) => {
     }
 });
 
+router.put("/:user_id", async (req, res) => {
+    try {
+        console.log("Updating user:", req.params.user_id);
+        console.log("New data:", req.body);
+
+        const updatedUser = await User.findOneAndUpdate(
+            { user_id: req.params.user_id },
+            req.body,
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        if (!updatedUser) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        res.json(updatedUser);
+
+    } catch (error) {
+        console.error("Error updating user:", error);
+
+        res.status(500).json({
+            message: error.message
+        });
+    }
+});
+router.delete("/:user_id", async (req, res) => {
+    try {
+        const deletedUser = await User.findOneAndDelete({
+            user_id: req.params.user_id
+        });
+
+        if (!deletedUser) {
+            return res.status(404).json({
+                message: "User not found"
+            });
+        }
+
+        res.json({
+            message: "User deleted successfully",
+            user: deletedUser
+        });
+
+    } catch (error) {
+        console.error("Error deleting user:", error);
+
+        res.status(500).json({
+            message: error.message
+        });
+    }
+});
 module.exports = router;
