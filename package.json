@@ -1,12 +1,12 @@
 {
   "name": "yogitrack-prototype",
   "version": "1.0.0",
-  "description": "",
+  "description": "YogiTrack prototype",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
-    "heroku-postbuild": "cd client && npm install && npm run build"
+    "heroku-postbuild": "cd client && npm ci --production=false && npm run build"
   },
   "keywords": [],
   "author": "",
