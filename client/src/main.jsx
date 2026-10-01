@@ -46,7 +46,10 @@ createRoot(document.getElementById('root')).render(
 )
 
 
-
+/**
+ * GetPage() directs to the page of the routing
+ * @returns 
+ */
 function GetPage() {
   const location = useLocation();
   let PageRender;
@@ -79,7 +82,10 @@ function GetPage() {
 
 
 
-
+/**
+ * GetAction()
+ * @returns 
+ */
 function GetAction() {
 
   const location = useLocation();
