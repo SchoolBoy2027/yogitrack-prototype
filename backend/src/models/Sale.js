@@ -12,8 +12,8 @@ const saleSchema = new mongoose.Schema(
             type: String,
             required: true,
         },
-        type: {
-            type: array('Senior', 'General'),
+        sale_type: {
+            type: String,
             required: true,
         },
 

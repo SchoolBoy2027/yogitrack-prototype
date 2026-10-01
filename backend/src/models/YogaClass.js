@@ -9,8 +9,8 @@ const yogaClassSchema = new mongoose.Schema(
       unique: true
     },
 
-    type: {
-      class_type: String,
+    class_type: {
+      type: String,
       required: true,
     },
     class_date: {
@@ -18,20 +18,20 @@ const yogaClassSchema = new mongoose.Schema(
       required: true,
     },
     instructor_id: {
-      type: string,
+      type: String,
       required: true,
     },
     instructor_name: {
-      type: string,
+      type: String,
       required: false,
     },
     
     start_time: {
-      type: time,
+      type: Time,
       required: true,
     },
     end_time: {
-      type: time,
+      type: Time,
       required: true,
     },
   },
