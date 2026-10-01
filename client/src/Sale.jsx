@@ -7,13 +7,13 @@ import { useParams } from "react-router-dom";
  * @returns List of Users
  */
 
-function ViewUser() {
+function ViewSale() {
 
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
 
-    fetch("http://localhost:5000/api/user")
+    fetch("http://localhost:5000/api/sale")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -36,7 +36,7 @@ function ViewUser() {
 
           {users.map((sale) => (
             
-            <tr dataID={user.sale_id}>
+            <tr dataID={sale.sale_id}>
             </tr>
           ))}
         </table>
@@ -46,8 +46,7 @@ function ViewUser() {
   );
 }
 /**
- *  AddModifySale(arrInstructors) Form Component used to Add or Modify Classes
- * @param {*} arrInstructors 
+ *  CUDSale(arrInstructors) Form Component used to Add or Modify Classes
  * @returns 
  */
 function CUDSale() {
