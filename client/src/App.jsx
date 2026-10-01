@@ -1,10 +1,10 @@
 
-import instructorReportsLogo from './assets/InstructorLogin.png'
+import instructorReportsLogo from './assets/instructorLogin.png'
 import reportsLogo from './assets/Reports.png'
 import salesLogo from './assets/sales.png'
 import instructorLogo from './assets/background_sunset.png'
-import customerLogo from './assets/Senior.png'
-import classLogo from './assets/General.png'
+import customerLogo from './assets/senior.png'
+import classLogo from './assets/general.png'
 
 /*
         import './App.css'
