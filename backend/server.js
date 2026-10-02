@@ -6,7 +6,8 @@ const connectDB = require("./db");
 
 const userRoutes = require("./src/routes/user");
 const customerRoutes = require("./src/routes/customer");
-
+const path = require("path");
+path.join(__dirname, "../client/dist");
 
 process.env.config=dotenv.config();
 
@@ -19,11 +20,13 @@ app.use(express.json());
 app.use("/api/users", userRoutes);
 app.use("/api/customers", customerRoutes);
 
+// Serve React frontend
+const frontendPath = path.join(__dirname, "../client/dist");
+
+app.use(express.static(frontendPath));
 
 app.get("/", (req, res) => {
-    res.json({
-        message: "MERN backend is running!"
-    });
+    res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 const PORT = process.env.PORT || 5000;
