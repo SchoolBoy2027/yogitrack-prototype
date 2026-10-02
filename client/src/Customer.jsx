@@ -2,7 +2,8 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import addButton from "./assets/btn-Add.png";
+import editButton from "./assets/editButton.png";
 
 function UpdateCustomer() {
 
@@ -107,7 +108,7 @@ function ViewCustomer() {
             <div className="container-fluid">
                 <div className="container-fluid fs-1 bg-dark text-white fw-bold left">
                     <div className="col-12" >
-                        <a href={getAddButton()}  ><img className="addButton" alt="Missing" src={getAddIcon()} title="Add Customer" /> </a>
+                        <a href={getAddButton()}  ><img className="addButton" alt="Missing" src={addButton} title="Add Customer" /> </a>
                         View Customers
                     </div>
                 </div>
@@ -142,7 +143,7 @@ function ViewCustomer() {
                                 <td>{customer.phone}</td>
                                 <td>{customer.email}</td>
                                 <td>{customer.communication_preference}</td>
-                                <td><a href={getEditButton() + customer.customer_id} title={'Edit ' + customer.fname + ' ' + customer.lname} ><img className="editButton" alt="Missing" src={getEditIcon()} /> </a></td>
+                                <td><a href={getEditButton() + customer.customer_id} title={'Edit ' + customer.fname + ' ' + customer.lname} ><img className="editButton" alt="Missing" src={editButton} /> </a></td>
 
                             </tr>
                         ))}

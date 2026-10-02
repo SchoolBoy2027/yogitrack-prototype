@@ -1,7 +1,8 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-
+import addButton from "./assets/btn-Add.png";
+import editButton from "./assets/editButton.png";
 /**
  * ViewUser()
  * @returns List of Users

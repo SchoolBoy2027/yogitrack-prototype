@@ -9,7 +9,7 @@ const customerRoutes = require("./src/routes/customer");
 const path = require("path");
 path.join(__dirname, "../client/dist");
 
-process.env.config=dotenv.config();
+process.env.config = dotenv.config();
 
 connectDB();
 
@@ -25,7 +25,8 @@ const frontendPath = path.join(__dirname, "../client/dist");
 
 app.use(express.static(frontendPath));
 
-app.get("/", (req, res) => {
+// React Router fallback
+app.get("/{*splat}", (req, res) => {
     res.sendFile(path.join(frontendPath, "index.html"));
 });
 
