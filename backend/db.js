@@ -1,13 +1,11 @@
 const mongoose = require("mongoose");
 require("dotenv").config();
-//todo fix this, not sure why I can't use the dotenv constants
-MONGO_URI = 'mongodb+srv://johnrcox1_db_user:bLN9lSwVDD3VySIk@cluster0.i4qpc1f.mongodb.net/yogitrack'
-//MONGO_URI = 'mongodb://localhost:27017/yogitrack'
 
 
+console.log("MONGO_URI exists:", !!process.env.MONGO_URI);
 const connectDB = async () => {
     try {
-        await mongoose.connect(MONGO_URI);
+        await mongoose.connect(process.env.MONGO_URI);
 
         console.log('MongoDB connected ');
     } catch (error) {
