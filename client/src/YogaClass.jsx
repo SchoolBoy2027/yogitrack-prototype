@@ -188,20 +188,13 @@ function ViewYogaClass() {
      * @returns image string
      */
 
-    function getEditIcon() {
-        return "/src/assets/editButton.png";
-    }
 
-
-    function getAddIcon() {
-        return "/src/assets/btn-Add.png";
-    }
     return (
         <>
             <div className="container-fluid">
                 <div className="container-fluid fs-1 bg-dark text-white fw-bold left">
                     <div className="col-12" >
-                        <a href={getAddButton()}  ><img className="addButton" alt="Missing" src={getAddIcon()} title="Add YogaClass" /> </a>
+                        <a href={getAddButton()}  ><img className="addButton" alt="Missing" src={addButton} title="Add YogaClass" /> </a>
                         View Yoga Classes
                     </div>
                 </div>
@@ -228,7 +221,7 @@ function ViewYogaClass() {
                                 <td>{yoga_class.instructor_id}</td>
                                 <td>{yoga_class.start_time}</td>
                                 <td>{yoga_class.end_time}</td>
-                                <td><a href={getEditButton() + yoga_class.yoga_class_id} title={'Edit ' + yoga_class.fname + ' ' + yoga_class.lname} ><img className="editButton" alt="Missing" src={getEditIcon()} /> </a></td>
+                                <td><a href={getEditButton() + yoga_class.yoga_class_id} title={'Edit ' + yoga_class.fname + ' ' + yoga_class.lname} ><img className="editButton" alt="Missing" src={editButton} /> </a></td>
 
                             </tr>
                         ))}
