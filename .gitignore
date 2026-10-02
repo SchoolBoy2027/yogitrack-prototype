@@ -2,3 +2,6 @@ Build front.bat
 Run Front.bat
 runDev Servers.bat
 node_modules/
+.env
+.env
+.gitignore
