@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import addButton from "./assets/btn-Add.png";
 import editButton from "./assets/editButton.png";
-import API_URL from "./config";
 
 function UpdateUser() {
 
@@ -14,7 +13,7 @@ function UpdateUser() {
 
   useEffect(() => {
 
-    fetch(`${API_URL}/api/users/${id}`)
+    fetch(`/api/users/${id}`)
       .then((response) => {
         console.log("Status:", response.status);
 
@@ -57,7 +56,7 @@ function ViewUser() {
 
   useEffect(() => {
 
-    fetch("${API_URL}/api/users")
+    fetch("/api/users")
       .then((response) => {
         console.log("Status:", response.status);
         console.log("Content-Type:", response.headers.get("content-type"));
@@ -182,7 +181,7 @@ function CreateUser(action, id) {
     console.log("Sending user:", user);
     let msg = document.getElementById("response");
     try {
-      const response = await fetch("${API_URL}/api/users", {
+      const response = await fetch("/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -376,7 +375,7 @@ function UpdateDeleteUser(action) {
 
     try {
       const response = await fetch(
-        `${API_URL}/api/users/${user.user_id}`,
+        `/api/users/${user.user_id}`,
         {
           method: "PUT",
           headers: {
@@ -414,7 +413,7 @@ function UpdateDeleteUser(action) {
 
     try {
       const response = await fetch(
-        `${API_URL}/api/users/${user.user_id}`,
+        `/api/users/${user.user_id}`,
         {
           method: "DELETE",
           headers: {
@@ -448,7 +447,7 @@ function UpdateDeleteUser(action) {
 
   useEffect(() => {
 
-    fetch(`${API_URL}/api/users/${id}`)
+    fetch(`/api/users/${id}`)
       .then((response) => {
         console.log("Status:", response.status);
 
