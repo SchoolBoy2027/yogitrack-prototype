@@ -1,11 +1,8 @@
-Build front.bat
-Run Front.bat
-runDev Servers.bat
+*.bat
+*.txt
 node_modules/
 .env
 .env
 .gitignore
 .env
-.env
-Change directory to here.bat
-.env
+.

@@ -15,7 +15,7 @@ function UserLogin() {
 
   useEffect(() => {
 
-    fetch("http://localhost:5000/api/users")
+    fetch("/api/users")
       .then((response) => {
         console.log("Status:", response.status);
         console.log("Content-Type:", response.headers.get("content-type"));
@@ -86,7 +86,7 @@ function Login2() {
     console.log("Sending user:", user);
     let msg = document.getElementById("response");
     try {
-      const response = await fetch("http://localhost:5000/api/users", {
+      const response = await fetch("/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"

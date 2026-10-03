@@ -13,7 +13,7 @@ function UpdateUser() {
 
   useEffect(() => {
 
-    fetch(`http://localhost:5000/api/users/${id}`)
+    fetch(`/api/users/${id}`)
       .then((response) => {
         console.log("Status:", response.status);
 
@@ -56,7 +56,7 @@ function ViewUser() {
 
   useEffect(() => {
 
-    fetch("http://localhost:5000/api/users")
+    fetch("/api/users")
       .then((response) => {
         console.log("Status:", response.status);
         console.log("Content-Type:", response.headers.get("content-type"));
@@ -181,7 +181,7 @@ function CreateUser(action, id) {
     console.log("Sending user:", user);
     let msg = document.getElementById("response");
     try {
-      const response = await fetch("http://localhost:5000/api/users", {
+      const response = await fetch("/api/users", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -375,7 +375,7 @@ function UpdateDeleteUser(action) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/${user.user_id}`,
+        `/api/users/${user.user_id}`,
         {
           method: "PUT",
           headers: {
@@ -413,7 +413,7 @@ function UpdateDeleteUser(action) {
 
     try {
       const response = await fetch(
-        `http://localhost:5000/api/users/${user.user_id}`,
+        `/api/users/${user.user_id}`,
         {
           method: "DELETE",
           headers: {
@@ -447,7 +447,7 @@ function UpdateDeleteUser(action) {
 
   useEffect(() => {
 
-    fetch(`http://localhost:5000/api/users/${id}`)
+    fetch(`/api/users/${id}`)
       .then((response) => {
         console.log("Status:", response.status);
 

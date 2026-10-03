@@ -13,7 +13,7 @@ function UpdateCustomer() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/api/customers/${id}`)
+        fetch(`/api/customers/${id}`)
             .then((response) => {
                 console.log("Status:", response.status);
 
@@ -57,7 +57,7 @@ function ViewCustomer() {
 
     useEffect(() => {
 
-        fetch("http://localhost:5000/api/customers")
+        fetch("/api/customers")
             .then((response) => {
                 console.log("Status:", response.status);
                 console.log("Content-Type:", response.headers.get("content-type"));
@@ -188,7 +188,7 @@ function CreateCustomer(action, id) {
         console.log("Sending customer:", customer);
         let msg = document.getElementById("response");
         try {
-            const response = await fetch("http://localhost:5000/api/customers", {
+            const response = await fetch("/api/customers", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -204,12 +204,12 @@ function CreateCustomer(action, id) {
             if (response.ok) {
                 msg.innerHTML = "Customer saved successfully!";
             } else {
-                msg.innerHTML = "Error: " + data.message;
+                msg.innerHTML = "Error: " + data.message + " Error "+ data.error;
             }
 
         } catch (error) {
             console.error("Error saving customer:", error);
-            msg.innerHTML = "Could not connect to the server.";
+            msg.innerHTML = "Could not connect to the server." + error;
         }
     };
 
@@ -385,7 +385,7 @@ function UpdateDeleteCustomer(action) {
 
         try {
             const response = await fetch(
-                `http://localhost:5000/api/customers/${customer.customer_id}`,
+                `/api/customers/${customer.customer_id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -423,7 +423,7 @@ function UpdateDeleteCustomer(action) {
 
         try {
             const response = await fetch(
-                `http://localhost:5000/api/customers/${customer.customer_id}`,
+                `/api/customers/${customer.customer_id}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -457,7 +457,7 @@ function UpdateDeleteCustomer(action) {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/api/customers/${id}`)
+        fetch(`/api/customers/${id}`)
             .then((response) => {
                 console.log("Status:", response.status);
 

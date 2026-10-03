@@ -14,7 +14,7 @@ function ViewSale() {
 
   useEffect(() => {
 
-    fetch("http://localhost:5000/api/sale")
+    fetch("/api/sale")
       .then((response) => response.json())
       .then((data) => {
         console.log(data);

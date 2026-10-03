@@ -106,7 +106,7 @@ function UpdateYogaClass() {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/api/yoga_classes/${id}`)
+        fetch(`/api/yoga_classes/${id}`)
             .then((response) => {
                 console.log("Status:", response.status);
 
@@ -150,7 +150,7 @@ function ViewYogaClass() {
 
     useEffect(() => {
 
-        fetch("http://localhost:5000/api/yoga_classes")
+        fetch("/api/yoga_classes")
             .then((response) => {
                 console.log("Status:", response.status);
                 console.log("Content-Type:", response.headers.get("content-type"));
@@ -261,7 +261,7 @@ function CreateYogaClass(action, id) {
         console.log("Sending yoga_class:", yoga_class);
         let msg = document.getElementById("response");
         try {
-            const response = await fetch("http://localhost:5000/api/yoga_classes", {
+            const response = await fetch("/api/yoga_classes", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -396,7 +396,7 @@ function UpdateDeleteYogaClass(action) {
 
         try {
             const response = await fetch(
-                `http://localhost:5000/api/yoga_classes/${yoga_class.yoga_class_id}`,
+                `/api/yoga_classes/${yoga_class.yoga_class_id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -434,7 +434,7 @@ function UpdateDeleteYogaClass(action) {
 
         try {
             const response = await fetch(
-                `http://localhost:5000/api/yoga_classes/${yoga_class.yoga_class_id}`,
+                `/yoga_classes/${yoga_class.yoga_class_id}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -468,7 +468,7 @@ function UpdateDeleteYogaClass(action) {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/api/yoga_classes/${id}`)
+        fetch(`/api/yoga_classes/${id}`)
             .then((response) => {
                 console.log("Status:", response.status);
 
