@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import addButton from "./assets/btn-Add.png";
 import editButton from "./assets/editButton.png";
+import API_URL from "./config";
 
 function UpdateCustomer() {
 
@@ -13,7 +14,7 @@ function UpdateCustomer() {
 
     useEffect(() => {
 
-        fetch(`/api/customers/${id}`)
+        fetch(`${API_URL}/api/customers/${id}`)
             .then((response) => {
                 console.log("Status:", response.status);
 
@@ -57,7 +58,7 @@ function ViewCustomer() {
 
     useEffect(() => {
 
-        fetch("/api/customers")
+        fetch("${API_URL}/api/customers")
             .then((response) => {
                 console.log("Status:", response.status);
                 console.log("Content-Type:", response.headers.get("content-type"));
@@ -188,7 +189,7 @@ function CreateCustomer(action, id) {
         console.log("Sending customer:", customer);
         let msg = document.getElementById("response");
         try {
-            const response = await fetch("/api/customers", {
+            const response = await fetch("${API_URL}/api/customers", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -204,7 +205,7 @@ function CreateCustomer(action, id) {
             if (response.ok) {
                 msg.innerHTML = "Customer saved successfully!";
             } else {
-                msg.innerHTML = "Error: " + data.message + " Error "+ data.error;
+                msg.innerHTML = "Error: " + data.message + " Error " + data.error;
             }
 
         } catch (error) {
@@ -385,7 +386,7 @@ function UpdateDeleteCustomer(action) {
 
         try {
             const response = await fetch(
-                `/api/customers/${customer.customer_id}`,
+                `${API_URL}/api/customers/${customer.customer_id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -423,7 +424,7 @@ function UpdateDeleteCustomer(action) {
 
         try {
             const response = await fetch(
-                `/api/customers/${customer.customer_id}`,
+                `${API_URL}/api/customers/${customer.customer_id}`,
                 {
                     method: "DELETE",
                     headers: {
@@ -457,7 +458,7 @@ function UpdateDeleteCustomer(action) {
 
     useEffect(() => {
 
-        fetch(`/api/customers/${id}`)
+        fetch(`${API_URL}/api/customers/${id}`)
             .then((response) => {
                 console.log("Status:", response.status);
 

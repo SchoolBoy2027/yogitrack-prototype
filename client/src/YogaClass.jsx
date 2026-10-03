@@ -1,5 +1,6 @@
 import addButton from "./assets/btn-Add.png";
 import editButton from "./assets/editButton.png";
+import API_URL from "./config";
 
 
 /**
@@ -106,7 +107,7 @@ function UpdateYogaClass() {
 
     useEffect(() => {
 
-        fetch(`/api/yoga_classes/${id}`)
+        fetch(`${API_URL}/api/yoga_classes/${id}`)
             .then((response) => {
                 console.log("Status:", response.status);
 
@@ -150,7 +151,7 @@ function ViewYogaClass() {
 
     useEffect(() => {
 
-        fetch("/api/yoga_classes")
+        fetch("${API_URL}/api/yoga_classes")
             .then((response) => {
                 console.log("Status:", response.status);
                 console.log("Content-Type:", response.headers.get("content-type"));
@@ -261,7 +262,7 @@ function CreateYogaClass(action, id) {
         console.log("Sending yoga_class:", yoga_class);
         let msg = document.getElementById("response");
         try {
-            const response = await fetch("/api/yoga_classes", {
+            const response = await fetch("${API_URL}/api/yoga_classes", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -396,7 +397,7 @@ function UpdateDeleteYogaClass(action) {
 
         try {
             const response = await fetch(
-                `/api/yoga_classes/${yoga_class.yoga_class_id}`,
+                `${API_URL}/api/yoga_classes/${yoga_class.yoga_class_id}`,
                 {
                     method: "PUT",
                     headers: {
@@ -434,7 +435,7 @@ function UpdateDeleteYogaClass(action) {
 
         try {
             const response = await fetch(
-                `/yoga_classes/${yoga_class.yoga_class_id}`,
+                `${API_URL}/yoga_classes/${yoga_class.yoga_class_id}`,
                 {
                     method: "DELETE",
                     headers: {
