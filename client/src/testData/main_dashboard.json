@@ -1,0 +1,66 @@
+[
+  {
+    "id": "schedule",
+    "title": "Yoga",
+    "path": "/ClassSchedule/View",
+    "image": "/images/scheduleLogo.png",
+    "order": 1,
+    "is_active": true
+  },
+  {
+    "id": "customers",
+    "title": "Customers",
+    "path": "/Customer/View",
+    "image": "/images/customerLogo.png",
+    "order": 2,
+    "is_active": true
+  },
+  {
+    "id": "yoga-classes",
+    "title": "Yoga Classes",
+    "path": "/YogaClass/View",
+    "image": "/images/classLogo.png",
+    "order": 3,
+    "is_active": true
+  },
+  {
+    "id": "instructors",
+    "title": "Instructors",
+    "path": "/User/View",
+    "image": "/images/instructorLogo.png",
+    "order": 4,
+    "is_active": true
+  },
+  {
+    "id": "sales",
+    "title": "Sales",
+    "path": "/Sale/View",
+    "image": "/images/salesLogo.png",
+    "order": 5,
+    "is_active": true
+  },
+  {
+    "id": "class-packages",
+    "title": "Class Packages",
+    "path": "/ClassPackage/View",
+    "image": "/images/packageLogo.png",
+    "order": 6,
+    "is_active": true
+  },
+  {
+    "id": "reports",
+    "title": "Reports",
+    "path": "/Report/View",
+    "image": "/images/reportsLogo.png",
+    "order": 7,
+    "is_active": true
+  },
+  {
+    "id": "instructor-reports",
+    "title": "Instructor Reports",
+    "path": "/InstructorReport/View",
+    "image": "/images/instructorReportsLogo.png",
+    "order": 8,
+    "is_active": true
+  }
+]

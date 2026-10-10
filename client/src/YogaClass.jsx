@@ -1,150 +1,18 @@
-import addButton from "./assets/btn-Add.png";
-import editButton from "./assets/editButton.png";
-
-
-/**
- *   CUDYogaClass(arrInstructors)
- * @param {*} arrInstructors 
- * @returns 
- */
-function CUDYogaClass() {
-    /* todo change instructor to select box */
-    return (
-        <>
-            <div className="userForm pb-1 rounded m-5" >
-                <div id="response" className="ajaxReturnMsg"></div>
-
-                <form id="modClass" className="classForm" action="doitUser">
-                    <div className="row pb-1 border-bottom border-dark border-solid">
-                        <div className="col-1">
-                            <div className="logo"></div>
-                        </div>
-                        <div className="col-10">
-                            <p className="p-3 fs-3 fw-bold text-white">Create Yoga Class</p>
-                        </div>
-                        <div className="col-1 fs-3 pr-3 fw-bold text-white  order-dark border-solid" title="Not functional yet">
-                            <a href="/YogaClass/View">
-                                <div className="btnClose FS5 text text-white">X</div>
-                            </a>
-                        </div>
-                    </div>
-
-                    <div className="row pb-1 border-bottom border-dark border-solid">
-                        <div className="col-2">
-                            <label for="type" className="formLabel fs-6 fw-bold">Type</label>
-                        </div>
-                        <div className="col-4">
-                            <select id="role" name="type" className="formInput ">
-                                <option value="Senior" >Senior</option>
-                                <option value="General" >General</option>
-                            </select>
-                        </div>
-                        <div className="col-2">
-                            <label for="date_of_class" className="formLabel fs-5 fw-bold">Date:</label>
-                        </div>
-                        <div className="col-4">
-                            <input type="date" name="date_of_class" id="date_of_class" className="formInput" />
-                        </div>
-
-                    </div>
-
-                    <div className="row pb-1 border-bottom border-dark border-solid">
-                        <div className="col-3">
-                            <label for="Instructor" className="formLabel fs-5 fw-bold">Instructor:</label>
-                        </div>
-                        <div className="col-8">
-                            <select id="role" name="YogaClass" className="formInput fs-6">
-                                <option value="Terry" >Terry</option>
-                                <option value="Tina" >Tina</option>
-                                <option value="Theresa" >Teresa</option>
-                                <option value="Tracy" >Tracy</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div className="row p-3 border-bottom border-dark  border-solid">
-                        <div className="col-2">
-                            <label for="start_time" className="formLabel fs-5 fw-bold">Start Time:</label>
-                        </div>
-                        <div className="col-4">
-                            <input type="time" name="start_time" id="start_time" className="formInput" />
-                        </div>
-                        <div className="col-2">
-                            <label for="end_date" className="formLabel fs-5 fw-bold">End Time:</label>
-                        </div>
-                        <div className="col-4">
-                            <input type="time" name="end_time" id="end_time" className="formInput" />
-                        </div>
-                    </div>
-
-                    <div className="row p-3 border-bottom border-dark  border-solid">
-                        <div className="col-9">
-                        </div>
-                        <div className="col-2">
-                            <button className="btn btn-dark fs-5 fw-bold" type="button" onClick="">Submit</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </>
-
-    );
-}
-
-
-
 import React from 'react';
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import addButton from "./assets/btn-Add.png";
+import editButton from "./assets/editButton.png";
+import PersonSelect from "./components/PersonSelect";
+import DDTable from "./components/DDTable";
 
-
-function UpdateYogaClass() {
-
-    const { id } = useParams();
-
-    const [yoga_class, setYogaClass] = useState(null);
-
-    useEffect(() => {
-
-        fetch(`/api/yoga_classes/${id}`)
-            .then((response) => {
-                console.log("Status:", response.status);
-
-                return response.json();
-            })
-            .then((data) => {
-                console.log("YogaClass:", data);
-                setYogaClass(data);
-            })
-            .catch((error) => {
-                console.error("Error fetching yoga_class:", error);
-            });
-
-    }, [id]);
-
-    return (
-        <div>
-            <h1>YogaClass</h1>
-
-            {yoga_class && (
-                <div>
-                    <p>ID: {yoga_class.yoga_class_id}</p>
-                    <p>First Name: {yoga_class.fname}</p>
-                    <p>Last Name: {yoga_class.lname}</p>
-                    <p>Email: {yoga_class.email}</p>
-                    <p>Phone: {yoga_class.phone}</p>
-                </div>
-            )}
-        </div>
-    );
-}
 
 /**
  * ViewYogaClass()
  * @returns List of YogaClasses
  */
 
-function ViewYogaClass() {
+function ViewYogaClass2() {
 
     const [yoga_classes, setYogaClasses] = useState([]);
 
@@ -168,65 +36,37 @@ function ViewYogaClass() {
     }, []);
 
     /**
-     *  getEditButton()
+     *  getEditRoute()
      * @returns routing string
      */
-    function getEditButton() {
+    function getEditRoute() {
         return "/YogaClass/Edit/";
     }
     /**
-     *  getAddButton()
+     *  getAddRoute()
      * @returns routing string
      */
 
-    function getAddButton() {
+    function getAddRoute() {
         return "/YogaClass/Add/";
     }
-
-    /**
-     * getEditIcon()
-     * @returns image string
-     */
-
 
     return (
         <>
             <div className="container-fluid">
                 <div className="container-fluid fs-1 bg-dark text-white fw-bold left">
                     <div className="col-12" >
-                        <a href={getAddButton()}  ><img className="addButton" alt="Missing" src={addButton} title="Add YogaClass" /> </a>
+                        <a href={getAddRoute()}  ><img className="addButton" alt="Missing" src={addButton} title="Add YogaClass" /> </a>
                         View Yoga Classes
                     </div>
                 </div>
 
+                <DDTable
+                    data={yoga_classes}
+                    actionPath={(row) => `/YogaClass/Edit/${row.yoga_class_id}`}
+                    actionImage={editButton}
+                />
 
-                <table id="yogaTable" className=" mt-1  table table-primary overflow-scroll sticky-top">
-                    <thead >
-                        <tr className="bg-bg-dark">
-                            <th>ID</th>
-                            <th>Class Type</th>
-                            <th>Date</th>
-                            <th>Instructor</th>
-                            <th>Start Time</th>
-                            <th>End Time</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {yoga_classes.map((yoga_class) => (
-                            <tr key={yoga_class.yoga_class_id}>
-                                <td> {yoga_class.yoga_class_id}</td>
-                                <td>{yoga_class.class_type}</td>
-                                <td>{yoga_class.date}</td>
-                                <td>{yoga_class.instructor_id}</td>
-                                <td>{yoga_class.start_time}</td>
-                                <td>{yoga_class.end_time}</td>
-                                <td><a href={getEditButton() + yoga_class.yoga_class_id} title={'Edit ' + yoga_class.fname + ' ' + yoga_class.lname} ><img className="editButton" alt="Missing" src={editButton} /> </a></td>
-
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
 
 
             </div>
@@ -234,28 +74,32 @@ function ViewYogaClass() {
         </>
     );
 }
-//    
-//    ${id}
 
+ const handleChange = (e) => {       //experiment with this
+        const value = e.target.value;
+        const text = e.target.options[e.target.selectedIndex].text;
+    }
 /**
  * CreateYogaClass(action, id)
  * @param {*} action 
  * @returns 
  */
 function CreateYogaClass(action, id) {
-
     const submitYogaClass = async () => {
         const form = document.getElementById("modClass");
 
         const formData = new FormData(form);
+        const instructor = document.getElementById("instructor_id");
+        const class_type = document.getElementById("class_type");
 
         const yoga_class = {
-            yoga_class_id: formData.get("yoga_class_id"),
-            class_type: formData.get("class_type"),
-            date: formData.get("class_date"),
-            instructor_id: formData.get("instructor"),
-            start_time: formData.get("city"),
-            end_time: formData.get("state"),
+            yoga_class_id: 999,            //replaced at the server route
+            yoga_class_type: class_type.options[class_type.selectedIndex].text,
+            yoga_class_date: formData.get("class_date"),
+            instructor_id: instructor.value,
+            instructor_name: instructor.options[instructor.selectedIndex].text,
+            start_time: new Date(`${formData.get("class_date")}T${formData.get("start_time")}`),
+            end_time: new Date(`${formData.get("class_date")}T${formData.get("end_time")}`),
         };
 
         console.log("Sending yoga_class:", yoga_class);
@@ -308,46 +152,41 @@ function CreateYogaClass(action, id) {
 
                     <div className="row pb-1 border-bottom border-dark border-solid">
                         <div className="col-2">
-                            <label for="type" className="formLabel fs-6 fw-bold">Type</label>
+                            <label htmlFor="class_type" className="formLabel fs-6 fw-bold">Type</label>
                         </div>
                         <div className="col-4">
-                            <select id="role" name="type" className="formInput ">
-                                <option value="Senior" >Senior</option>
+                            <select id="class_type" name="class_type" className="formInput ">
                                 <option value="General" >General</option>
+                                <option value="Senior" >Special</option>
                             </select>
                         </div>
                         <div className="col-2">
-                            <label for="date_of_class" className="formLabel fs-5 fw-bold">Date:</label>
+                            <label htmlFor="class_date" className="formLabel fs-5 fw-bold">Date:</label>
                         </div>
                         <div className="col-4">
-                            <input type="date" name="date_of_class" id="date_of_class" className="formInput" />
+                            <input type="date" name="class_date" id="class_date" className="formInput" />
                         </div>
 
                     </div>
 
                     <div className="row pb-1 border-bottom border-dark border-solid">
-                        <div className="col-3">
-                            <label for="Instructor" className="formLabel fs-5 fw-bold">Instructor:</label>
-                        </div>
-                        <div className="col-8">
-                            <select id="role" name="YogaClass" className="formInput fs-6">
-                                <option value="Terry" >Terry</option>
-                                <option value="Tina" >Tina</option>
-                                <option value="Theresa" >Teresa</option>
-                                <option value="Tracy" >Tracy</option>
-                            </select>
-                        </div>
+                        <PersonSelect               /* columns are built in */
+                            endpoint="/api/users/instructors"
+                            label="Instructor"
+                            onChange={handleChange}
+                        />
+
                     </div>
 
                     <div className="row p-3 border-bottom border-dark  border-solid">
                         <div className="col-2">
-                            <label for="start_time" className="formLabel fs-5 fw-bold">Start Time:</label>
+                            <label htmlFor="start_time" className="formLabel fs-5 fw-bold">Start Time:</label>
                         </div>
                         <div className="col-4">
                             <input type="time" name="start_time" id="start_time" className="formInput" />
                         </div>
                         <div className="col-2">
-                            <label for="end_date" className="formLabel fs-5 fw-bold">End Time:</label>
+                            <label htmlFor="end_time" className="formLabel fs-5 fw-bold">End Time:</label>
                         </div>
                         <div className="col-4">
                             <input type="time" name="end_time" id="end_time" className="formInput" />
@@ -358,7 +197,7 @@ function CreateYogaClass(action, id) {
                         <div className="col-9">
                         </div>
                         <div className="col-2">
-                            <button className="btn btn-dark fs-5 fw-bold" type="button" onClick="">Submit</button>
+                            <button className="btn btn-dark fs-5 fw-bold" type="button" onClick={submitYogaClass}>Submit</button>
                         </div>
                     </div>
                 </form>
@@ -375,21 +214,32 @@ function CreateYogaClass(action, id) {
 function UpdateDeleteYogaClass(action) {
     let msg = document.getElementById("response");
 
-    /**
-     * submit yoga_class Updates
-     */
+  const formatDate = (value) => {
+    return new Date(value).toLocaleDateString("en-CA");
+};
+
+    const formatTime = (value) => {
+        return new Date(value).toLocaleTimeString("en-US", {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false
+        });
+    };
+
     const updateYogaClass = async () => {
         const form = document.getElementById("modClass");
 
         const formData = new FormData(form);
+        const instructor=document.getElementById("instructor_id");
 
-        const yoga_class = {
-            yoga_class_id: formData.get("yoga_class_id"),
-            class_type: formData.get("class_type"),
-            date: formData.get("class_date"),
-            instructor_id: formData.get("instructor"),
-            start_time: formData.get("city"),
-            end_time: formData.get("state"),
+    const yoga_class = {
+            yoga_class_id: formData.get("yoga_class_id"),            //replaced at the server route
+            yoga_class_type: class_type.options[class_type.selectedIndex].text,
+            yoga_class_date: formData.get("class_date"),
+            instructor_id: instructor.value,
+            instructor_name: instructor.options[instructor.selectedIndex].text,
+            start_time: new Date(`${formData.get("class_date")}T${formData.get("start_time")}`),
+            end_time: new Date(`${formData.get("class_date")}T${formData.get("end_time")}`),
         };
 
         console.log("Updating yoga_class:", yoga_class);
@@ -486,81 +336,94 @@ function UpdateDeleteYogaClass(action) {
     return (
         <>
             {yoga_class && (
-                <div className="userForm pb-1 rounded m-5" >
-                    <div id="response" className="ajaxReturnMsg"></div>
+                <>
+                    <div className="userForm pb-1 rounded m-5" >
+                        <div id="response" className="ajaxReturnMsg"></div>
 
-                    <form id="modClass" className="classForm" action="doitUser">
-                        <div className="row pb-1 border-bottom border-dark border-solid">
-                            <div className="col-1">
-                                <div className="logo"></div>
+                        <form id="modClass" className="classForm" action="doitUser">
+                            <div className="row pb-1 border-bottom border-dark border-solid">
+                                <div className="col-1">
+                                    <div className="logo"></div>
+                                </div>
+                                <div className="col-10">
+                                    <p className="p-3 fs-3 fw-bold text-white">Update Yoga Class </p>
+                                </div>
+                                <div className="col-1 fs-3 pr-3 fw-bold text-white  order-dark border-solid" title="Return to View">
+                                    <a href="/YogaClass/View">
+                                        <div className="btnClose FS5 text text-white">X</div>
+                                    </a>
+                                </div>
                             </div>
-                            <div className="col-10">
-                                <p className="p-3 fs-3 fw-bold text-white">Create Yoga Class</p>
+                            <div className="row pb-1 border-bottom border-dark border-solid">
+                                <div className="col-4">
+                                    <label htmlFor="yoga_class_id" className="formLabel fs-5 fw-bold">Yoga Class ID:</label>
+                                </div>
+                                <div className="col-6">
+                                    <input type="text" name="yoga_class_id" id="yoga_class_id" className="formInput"
+                                        value={yoga_class.yoga_class_id}
+                                    />
+                                </div>
                             </div>
-                            <div className="col-1 fs-3 pr-3 fw-bold text-white  order-dark border-solid" title="Not functional yet">
-                                <a href="/YogaClass/View">
-                                    <div className="btnClose FS5 text text-white">X</div>
-                                </a>
-                            </div>
-                        </div>
+                              
+                            <div className="row pb-1 border-bottom border-dark border-solid">
+                            
+                                <div className="col-2">
+                                    <label htmlFor="class_type" className="formLabel fs-5 fw-bold">Type</label>
+                                </div>
+                                <div className="col-2">
+                                    <select id="class_type" name="class_type" className="formInput" defaultValue={yoga_class.yoga_class_type}>
+                                        <option value="Senior" >Senior</option>
+                                        <option value="General" >General</option>
+                                    </select>
+                                </div>
+                                <div className="col-2">
+                                    <label htmlFor="class_date" className="formLabel fs-5 fw-bold">Date:</label>
+                                </div>
+                                <div className="col-4">
+                                    <input type="date" name="class_date" id="class_date" className="formInput"
+                                        defaultValue={formatDate(yoga_class.yoga_class_date)}
+                                    />
+                                </div>
 
-                        <div className="row pb-1 border-bottom border-dark border-solid">
-                            <div className="col-2">
-                                <label for="type" className="formLabel fs-6 fw-bold">Type</label>
-                            </div>
-                            <div className="col-4">
-                                <select id="role" name="type" className="formInput ">
-                                    <option value="Senior" >Senior</option>
-                                    <option value="General" >General</option>
-                                </select>
-                            </div>
-                            <div className="col-2">
-                                <label for="date_of_class" className="formLabel fs-5 fw-bold">Date:</label>
-                            </div>
-                            <div className="col-4">
-                                <input type="date" name="date_of_class" id="date_of_class" className="formInput" />
                             </div>
 
-                        </div>
+                            <PersonSelect               /* columns are built in */
+                                    endpoint="/api/users/instructors"
+                                    label="Instructor"
+                                    onChange={handleChange}
+                                    value={yoga_class.instructor_id}
+                                    />
 
-                        <div className="row pb-1 border-bottom border-dark border-solid">
-                            <div className="col-3">
-                                <label for="Instructor" className="formLabel fs-5 fw-bold">Instructor:</label>
+                            <div className="row p-3 border-bottom border-dark  border-solid">
+                                <div className="col-2">
+                                    <label htmlFor="start_time" className="formLabel fs-5 fw-bold">Start Time:</label>
+                                </div>
+                                <div className="col-4">
+                                    <input type="time" name="start_time" id="start_time" className="formInput"
+                                        defaultValue={formatTime(yoga_class.start_time)}/>
+                                </div>
+                                <div className="col-2">
+                                    <label htmlFor="end_time" className="formLabel fs-5 fw-bold">End Time:</label>
+                                </div>
+                                <div className="col-4">
+                                    <input type="time" name="end_time" id="end_time" className="formInput"
+                                        defaultValue={formatTime(yoga_class.end_time)} />
+                                </div>
                             </div>
-                            <div className="col-8">
-                                <select id="role" name="YogaClass" className="formInput fs-6">
-                                    <option value="Terry" >Terry</option>
-                                    <option value="Tina" >Tina</option>
-                                    <option value="Theresa" >Teresa</option>
-                                    <option value="Tracy" >Tracy</option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div className="row p-3 border-bottom border-dark  border-solid">
-                            <div className="col-2">
-                                <label for="start_time" className="formLabel fs-5 fw-bold">Start Time:</label>
+                            <div className="row p-3 border-bottom border-bg-light  border-solid">
+                                <div className="col-5">
+                                    <button className="btn btn-dark fs-5 fw-bold delete" title="You sure about this, customers get mad!?!?!?" type="button" onClick={deleteYogaClass}>Delete Yoga Class</button>
+                                </div>
+                                <div className="col-2">
+                                </div>
+                                <div className="col-5">
+                                    <button className="btn btn-dark fs-5 fw-bold update" title="Customers love more classes!" type="button" onClick={updateYogaClass}>Update Yoga Class</button>
+                                </div>
                             </div>
-                            <div className="col-4">
-                                <input type="time" name="start_time" id="start_time" className="formInput" />
-                            </div>
-                            <div className="col-2">
-                                <label for="end_date" className="formLabel fs-5 fw-bold">End Time:</label>
-                            </div>
-                            <div className="col-4">
-                                <input type="time" name="end_time" id="end_time" className="formInput" />
-                            </div>
-                        </div>
-
-                        <div className="row p-3 border-bottom border-dark  border-solid">
-                            <div className="col-9">
-                            </div>
-                            <div className="col-2">
-                                <button className="btn btn-dark fs-5 fw-bold" type="button" onClick="">Submit</button>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                        </form>
+                    </div>
+                </>
             )}
 
         </>
@@ -576,10 +439,10 @@ function YogaClassAction(action, id) {
             return <UpdateDeleteYogaClass action="Update" id={id} />;
 
         case "View":
-            return <ViewYogaClass />;
+            return <ViewYogaClass2 />;
 
         default:
-            return <ViewYogaClass />;
+            return <ViewYogaClass2 />;
     }
 }
 
@@ -591,26 +454,3 @@ function YogaClass() {
 
 
 export default YogaClass;
-
-/*
-       function Add() {
-        return (
-            <h2>I am a Add!</h2>
-        );
-        }
-
-        function Modify() {
-        return (
-            <h2>I am Modify!</h2>
-        );
-        }
-
-        function View() {
-        return (
-            <>
-            <h1>I am View?</h1>
-            </>
-        );
-        }
-
-        */

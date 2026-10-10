@@ -1,0 +1,76 @@
+[{
+  "_id": {
+    "$oid": "6acaa13c42f4fe4303e8c54f"
+  },
+  "yoga_class_id": "2026000001",
+  "yoga_class_type": "General",
+  "yoga_class_date": {
+    "$date": "2026-10-14T00:00:00.000Z"
+  },
+  "instructor_id": "I0003",
+  "instructor_name": "David Martinez",
+  "start_time": {
+    "$date": "2026-10-14T22:02:00.000Z"
+  },
+  "end_time": {
+    "$date": "2026-10-15T02:03:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6acaa65e439244795ac73de9"
+  },
+  "yoga_class_id": "2026000002",
+  "yoga_class_type": "General",
+  "yoga_class_date": {
+    "$date": "2026-10-15T00:00:00.000Z"
+  },
+  "instructor_id": "I0002",
+  "instructor_name": "Sarah Johnson",
+  "start_time": {
+    "$date": "2026-10-15T22:55:00.000Z"
+  },
+  "end_time": {
+    "$date": "2026-10-15T23:55:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6acaa66c439244795ac73dea"
+  },
+  "yoga_class_id": "2026000003",
+  "yoga_class_type": "General",
+  "yoga_class_date": {
+    "$date": "2026-10-15T00:00:00.000Z"
+  },
+  "instructor_id": "I0003",
+  "instructor_name": "David Martinez",
+  "start_time": {
+    "$date": "2026-10-16T00:55:00.000Z"
+  },
+  "end_time": {
+    "$date": "2026-10-16T01:55:00.000Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6acaa67a439244795ac73deb"
+  },
+  "yoga_class_id": "2026000004",
+  "yoga_class_type": "General",
+  "yoga_class_date": {
+    "$date": "2026-10-15T00:00:00.000Z"
+  },
+  "instructor_id": "I0004",
+  "instructor_name": "Jennifer Williams",
+  "start_time": {
+    "$date": "2026-10-16T02:55:00.000Z"
+  },
+  "end_time": {
+    "$date": "2026-10-16T03:55:00.000Z"
+  },
+  "__v": 0
+}]

@@ -1,120 +1,69 @@
-import { StrictMode } from 'react'
-import { createRoot } from 'react-dom/client'
+import { StrictMode } from "react";
+import { createRoot } from "react-dom/client";
 import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 
+import "./index.css";
 
-import './index.css'
-import App from './App.jsx'
-import User from './User.jsx'
-import YogaClass from './YogaClass.jsx'
-import Customer from './Customer.jsx'
-import Sale from './Sale.jsx'
-import Login from './Login.jsx'
+import App from "./App.jsx";
+import User from "./User.jsx";
+import YogaClass from "./YogaClass.jsx";
+import Customer from "./Customer.jsx";
+import Sale from "./Sale.jsx";
+import ClassPackage from "./ClassPackage.jsx";
+import ClassSchedule from "./ClassSchedule";
+import Login from "./Login.jsx";
+import Footer from "./Footer.jsx";
+import Header from "./Header.jsx";
 
+import IsLoggedIn from "./IsLoggedIn.jsx";      //security wrapper for the site below.
 
-import Footer from './Footer.jsx'
-import Header from './Header.jsx'
-/*https://stackoverflow.com/questions/75522048/react-how-to-access-urls-parameters*/
-
-
-createRoot(document.getElementById('root')).render(
-  <>
-
-
-    <StrictMode>
-      <BrowserRouter>
-        <Header />
-
-        <Routes>
-          <Route path="/Customer/:action" element={<Customer />} />
-          <Route path="/Customer/:action/:id" element={<Customer />} />
-          <Route path="/User/:action" element={<User />} />
-          <Route path="/User/:action/:id" element={<User />} />
-          <Route path="/YogaClass/:action" element={<YogaClass />} />
-          <Route path="/YogaClass/:action/:id" element={<YogaClass />} />
-          <Route path="/Sale/:action" element={<Sale />} />
-          <Route path="/Sale/:action/:id" element={<Sale />} />
-          <Route path="/Dashboard" element={<App />} />
-          <Route path="/Login" element={<Login />} />
-          <Route path="" element={<Login />} />
-        </Routes>
-      </BrowserRouter>
-      <Footer />
-    </StrictMode>
-
-  </>
-)
+import { AuthProvider } from "./AuthContext";
 
 
-/**
- * GetPage() directs to the page of the routing
- * @returns 
- */
-function GetPage() {
+function Layout() {
   const location = useLocation();
-  let PageRender;
+  const hideHeader = location.pathname === "/Login" || location.pathname === "/";
 
-  console.log(location.pathname);
-  switch (location.pathname) {
-    case "/YogaClass":
-      PageRender = YogaClass;
-      break;
+  return (
+    <>
 
-    case "/User":
-      PageRender = User;
-      break;
-
-    case "/Customer":
-      PageRender = Customer;
-      break;
-
-    case "/Sale":
-      PageRender = Sale;
-      break;
-
-    default:
-      PageRender = App;
-      break;
-  }
-
-  return <PageRender />;
+      {!hideHeader && (  <Header />  )}
+     <main className="position-fixed start-0 end-0 overflow-auto mt-5" style={{ height: "70vh" }} >
+      <div className="container-fluid mt-3">
+      <Routes>
+          <Route element={<IsLoggedIn />}>
+              <Route path="/Customer/:action" element={<Customer />} />
+              <Route path="/Customer/:action/:id" element={<Customer />} />
+              <Route path="/User/:action" element={<User />} />
+              <Route path="/User/:action/:id" element={<User />} />
+              <Route path="/YogaClass/:action" element={<YogaClass />} />
+              <Route path="/YogaClass/:action/:id" element={<YogaClass />} />
+              <Route path="/Sale/:action" element={<Sale />} />
+              <Route path="/Sale/:action/:id" element={<Sale />} />
+              <Route path="/ClassPackage/:action" element={<ClassPackage />} />
+              <Route path="/ClassPackage/:action/:id" element={<ClassPackage />} />
+               <Route path="/ClassSchedule/View" element={<ClassSchedule />} />
+              <Route path="/Dashboard" element={<App />} />
+          </Route>
+          <Route path="*" element={<Login />} />  /* The catch all, login redirects to the dashboard */
+      </Routes>
+      </div>
+      </main>
+    </>
+  );
 }
 
-
-
-/**
- * GetAction()
- * @returns 
- */
-function GetAction() {
-
-  const location = useLocation();
-  let PageAction;
-
-  console.log(location.pathname);
-
-  const queryParams = new URLSearchParams(window.location.search)
-  const term = queryParams.get("term")
-  console.log(term);
-
-  switch (term) {
-    case "create":
-      PageAction = 'create';
-      break;
-
-    case "update":
-      PageAction = 'update';
-
-      break;
-
-    case "delete":
-      PageAction = 'delete';
-      break;
-
-    case "read":
-      PageAction = 'read';
-      break;
-  }
-
-  return PageAction;
-}
+createRoot(document.getElementById("root")).render(
+  <StrictMode>
+    <BrowserRouter>
+      <AuthProvider>
+        
+        <Layout />
+        
+      </AuthProvider>
+      <footer className="fixed-bottom" style={{ height: "10vh" }}>
+        <Footer />
+      </footer>
+    </BrowserRouter>
+  </StrictMode>
+);

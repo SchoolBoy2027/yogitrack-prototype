@@ -4,6 +4,26 @@ const Customer = require("../models/Customer");
 
 console.log("CUSTOMER ROUTES LOADED");
 
+
+// Generate a 5-character customer ID 
+async function generateCustomerId() {
+  const prefix = "C";
+
+  // Count only users with this role
+  const customerCount = await Customer.countDocuments();
+
+  // Next number for this role
+  const nextNumber = customerCount + 1;
+
+  // Convert to 4 digits
+  const numberPart = String(nextNumber).padStart(4, "0");
+
+  // Return 5-character ID
+  return prefix + numberPart;
+}
+
+
+
 router.get("/", async (req, res) => {
   try {
     console.log("Finding customers....");
@@ -40,10 +60,18 @@ router.get("/:id", async (req, res) => {
     });
   }
 });
-
+//post is Insert
 router.post("/", async (req, res) => {
   try {
-    const customer = new Customer(req.body);
+
+    const customer_id = await generateCustomerId();
+
+    // Create the user with the generated ID
+    const customer = new User({
+      ...req.body,                                  // copy submitted fields, spread operator
+      customer_id: customer_id                    // generate the ID
+    });
+
 
     const savedCustomer = await customer.save();
 
@@ -57,6 +85,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+//update
 router.put("/:customer_id", async (req, res) => {
   try {
     console.log("Updating customer:", req.params.customer_id);
@@ -87,6 +116,7 @@ router.put("/:customer_id", async (req, res) => {
     });
   }
 });
+//delete
 router.delete("/:customer_id", async (req, res) => {
   try {
     const deletedCustomer = await Customer.findOneAndDelete({

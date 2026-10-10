@@ -1,50 +1,35 @@
 
 import React from 'react';
+
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import addButton from "./assets/btn-Add.png";
 import editButton from "./assets/editButton.png";
+import DDTable from "./components/DDTable";
+import DBF from "./library/DBF";
+import FormHelp from './library/FormHelp';
 
-function UpdateUser() {
 
-  const { id } = useParams();
 
-  const [user, setUser] = useState(null);
-
-  useEffect(() => {
-
-    fetch(`/api/users/${id}`)
-      .then((response) => {
-        console.log("Status:", response.status);
-
-        return response.json();
-      })
-      .then((data) => {
-        console.log("User:", data);
-        setUser(data);
-      })
-      .catch((error) => {
-        console.error("Error fetching user:", error);
-      });
-
-  }, [id]);
-
-  return (
-    <div>
-      <h1>User</h1>
-
-      {user && (
-        <div>
-          <p>ID: {user.user_id}</p>
-          <p>First Name: {user.fname}</p>
-          <p>Last Name: {user.lname}</p>
-          <p>Email: {user.email}</p>
-          <p>Phone: {user.phone}</p>
-        </div>
-      )}
-    </div>
-  );
+/**
+ *  getAddRoute()
+ * @returns routing string
+ */
+function getAddRoute() {
+  return "/User/Add/";
 }
+
+
+/**
+ *  getEditRoute()
+ * @returns routing string
+ */
+function getEditRoute() {
+  return "/User/Edit/";
+}
+
+
+
 /**
  * ViewUser()
  * @returns List of Users
@@ -58,99 +43,40 @@ function ViewUser() {
 
     fetch("/api/users")
       .then((response) => {
-        console.log("Status:", response.status);
-        console.log("Content-Type:", response.headers.get("content-type"));
+        FormHelp.LogIt2("Status:", response.status);
+        FormHelp.LogIt2("Content-Type:", response.headers.get("content-type"));
 
         return response.json();
       })
       .then((data) => {
-        console.log("Users:", data);
+        FormHelp.LogIt2("Users:", data);
         setUsers(data);
       })
       .catch((error) => {
-        console.error("Error fetching users:", error);
+        FormHelp.ConsoleErr("Error fetching users:", error);
       });
 
   }, []);
-
-  /**
-   *  getEditButton()
-   * @returns routing string
-   */
-  function getEditButton() {
-    return "/User/Edit/";
-  }
-  /**
-   *  getAddButton()
-   * @returns routing string
-   */
-
-  function getAddButton() {
-    return "/User/Add/";
-  }
-
-  /**
-   * getEditIcon()
-   * @returns image string
-   */
 
   return (
     <>
       <div className="container-fluid">
         <div className="container-fluid fs-1 bg-dark text-white fw-bold left">
           <div className="col-12" >
-            <a href={getAddButton()}  ><img className="addButton" alt="Missing" src={addButton} title="Add User" /> </a>
+            <a href={getAddRoute()}  ><img className="addButton" alt="Missing" src={addButton} title="Add User" /> </a>
             View Instructors and Managers
           </div>
         </div>
-
-
-        <table id="yogaTable" className=" mt-5 datatable table table-secondary overflow-scroll sticky-top">
-          <thead>
-            <tr>
-              <th>ID</th>
-              <th>Role</th>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Address</th>
-              <th>City</th>
-              <th>State</th>
-              <th>Zip Code</th>
-              <th>Phone</th>
-              <th>Email</th>
-              <th>Preference</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody>
-            {users.map((user) => (
-              <tr key={user.user_id}>
-                <td> {user.user_id}</td>
-                <td>{user.role}</td>
-                <td>{user.fname}</td>
-                <td>{user.lname}</td>
-                <td>{user.address}</td>
-                <td>{user.city}</td>
-                <td>{user.state}</td>
-                <td>{user.zip}</td>
-                <td>{user.phone}</td>
-                <td>{user.email}</td>
-                <td>{user.communication_preference}</td>
-                <td><a href={getEditButton() + user.user_id} title={'Edit ' + user.fname + ' ' + user.lname} ><img className="editButton" alt="Missing" src={editButton} /> </a></td>
-
-              </tr>
-            ))}
-          </tbody>
-        </table>
-
-
+        <DDTable
+          data={users}
+          actionPath={(row) => `/User/Edit/${row.user_id}`}
+          actionImage={editButton}
+        />
       </div>
-
     </>
   );
 }
-//    
-//    ${id}
+
 
 /**
  * CreateUser(action, id)
@@ -178,7 +104,7 @@ function CreateUser(action, id) {
       communication_preference: formData.get("communication")
     };
 
-    console.log("Sending user:", user);
+    FormHelp.LogIt2("Sending user:", user);
     let msg = document.getElementById("response");
     try {
       const response = await fetch("/api/users", {
@@ -191,18 +117,11 @@ function CreateUser(action, id) {
 
       const data = await response.json();
 
-      console.log("Server response:", data);
-
-
-      if (response.ok) {
-        msg.innerHTML = "Instructor saved successfully!";
-      } else {
-        msg.innerHTML = "Error: " + data.message;
-      }
+      FormHelp.LogIt2("Server response:", data);
+      FormHelp.ErrCheck(response);
 
     } catch (error) {
-      console.error("Error saving user:", error);
-      msg.innerHTML = "Could not connect to the server.";
+      FormHelp.DisplayErr(error);
     }
   };
 
@@ -371,7 +290,7 @@ function UpdateDeleteUser(action) {
       communication_preference: formData.get("communication")
     };
 
-    console.log("Updating user:", user);
+    FormHelp.LogIt2("Updating user:", user);
 
     try {
       const response = await fetch(
@@ -385,15 +304,10 @@ function UpdateDeleteUser(action) {
         }
       );
       const data = await response.json();
-      if (response.ok) {
-        msg.innerHTML = "Instructor saved successfully!";
-      } else {
-        msg.innerHTML = "Error: " + data.message;
-      }
+      FormHelp.ErrCheck(response)
 
     } catch (error) {
-      console.error("Error saving user:", error);
-      msg.innerHTML = "Error saving user:", error;
+      FormHelp.DisplayErr(error);
     }
   };
 
@@ -409,7 +323,7 @@ function UpdateDeleteUser(action) {
       user_id: formData.get("user_id"),
     };
 
-    console.log("Deleting user:", user);
+    FormHelp.LogIt2("Deleting user:", user);
 
     try {
       const response = await fetch(
@@ -424,17 +338,10 @@ function UpdateDeleteUser(action) {
 
       const data = await response.json();
 
-      console.log("Server response:", data);
-
-      if (response.ok) {
-        msg.innerHTML = "Instructor saved successfully!";
-      } else {
-        msg.innerHTML = "Error: " + data.message;
-      }
+      FormHelp.ErrCheck(response);
 
     } catch (error) {
-      console.error("Error saving user:", error);
-      msg.innerHTML = "Could not connect to the server.";
+      FormHelp.DisplayErr(error);
     }
   }
 
@@ -449,7 +356,7 @@ function UpdateDeleteUser(action) {
 
     fetch(`/api/users/${id}`)
       .then((response) => {
-        console.log("Status:", response.status);
+        FormHelp.LogIt2("Status:", response.status);
 
         return response.json();
       })
@@ -457,7 +364,7 @@ function UpdateDeleteUser(action) {
         setUser(data);
       })
       .catch((error) => {
-        console.error("Error fetching user:", error);
+        FormHelp.ConsoleErr("Error fetching user:", error);
       });
 
   }, [id]);

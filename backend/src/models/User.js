@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema(
       required: true
     },
     communication_preference: {
-      type: String, //array('Phone','Email'),
+      type: String, 
       required: true
     },
     email: {
@@ -50,7 +50,11 @@ const userSchema = new mongoose.Schema(
     password: {
       type: String,
       required: false
-    },    
+    },
+    mustChangePassword: {
+    type: Boolean,
+    default: true
+  }    
 });
 
 module.exports = mongoose.model("User", userSchema, "user");

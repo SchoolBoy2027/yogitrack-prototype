@@ -1,84 +1,12 @@
-
-import instructorReportsLogo from './assets/instructorLogin.png'
-import reportsLogo from './assets/Reports.png'
-import salesLogo from './assets/sales.png'
-import instructorLogo from './assets/background_sunset.png'
-import customerLogo from './assets/senior.png'
-import classLogo from './assets/general.png'
-
-/*
-        import './App.css'
-           <div className="container-flex">
-          <img src={background} className="base" width="170" height="100vh" alt="" />
-          <img src={seniorLogo} className="card-img-top" alt="Missing" />
-          <img src={generalLogo} className="vite" alt="Vite logo" />
-        </div>
-*/
-
-
+import CardDeck from "./components/CardDeck";
 
 function App() {
-
   return (
-
-    <div className="row p-5 ms-5 ">
-
-      <div className="card col-2 ms-5" title="Customers" >
-        <div className="row">
-          <img src={customerLogo} className="card-img-top" alt="Missing" />
-        </div>
-        <div className=" row pl-1 pr-1 mb-0">
-          <a href="/Customer/View" className="btn btn-dark fw-bold dash-button">Customers</a>
-        </div>
-      </div>
-
-      <div className="card col-2 ms-5" title="Classes" >
-        <div className="row">
-          <img src={classLogo} className="card-img-top" alt="Missing" />
-        </div>
-        <div className=" row pl-1 pr-1 mb-0">
-          <a href="/YogaClass/View" className="btn btn-dark fw-bold dash-button">Yoga </a>
-        </div>
-      </div>
-
-      <div className="card col-2 ms-5" title="Instructors" >
-        <div className="row">
-          <img src={instructorLogo} className="card-img-top" alt="Missing" />
-        </div>
-        <div className=" row pl-1 pr-1 mb-0">
-          <a href="/User/View" className="btn btn-dark fw-bold dash-button">Instructors</a>
-        </div>
-      </div>
-
-      <div className="card col-2 ms-5" title="Sales" >
-        <div className="row">
-          <img src={salesLogo} className="card-img-top" alt="Missing" />
-        </div>
-        <div className=" row pl-1 pr-1 mb-0">
-          <a href="/Sale/View" className="btn btn-dark fw-bold dash-button">Sales</a>
-        </div>
-      </div>
-
-      <div className="card col-2 ms-5" title="Reports" >
-        <div className="row">
-          <img src={reportsLogo} className="card-img-top" alt="Missing" />
-        </div>
-        <div className=" row pl-1 pr-1 mb-0">
-          <a href="/Report/View" className="btn btn-dark fw-bold dash-button">Reports</a>
-        </div>
-      </div>
-
-      <div className="card col-2 ms-5 p5" title="Instructor Reports" >
-        <div className="row">
-          <img src={instructorReportsLogo} className="card-img-top" alt="Missing" />
-        </div>
-        <div className=" row pl-1 pr-1 mb-0">
-          <a href="InstructorReport/View" className="btn btn-dark fw-bold dash-button">Instructor Reports</a>
-        </div>
-      </div>
-    </div>
-
-  )
+    <CardDeck
+      api="/api/dashboard-main"
+      title="YogiTrack Dashboard"
+    />
+  );
 }
 
 export default App

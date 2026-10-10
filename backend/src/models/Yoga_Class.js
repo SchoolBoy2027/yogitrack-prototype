@@ -3,18 +3,18 @@ const mongoose = require("mongoose");
 const yogaClassSchema = new mongoose.Schema(
   {
 
-    id: {
-      type: Integer,
+    yoga_class_id: {
+      type: String,
       required: true,
       unique: true
     },
 
-    class_type: {
+    yoga_class_type: {
       type: String,
       required: true,
     },
-    class_date: {
-      type: date,
+    yoga_class_date: {
+      type: Date,
       required: true,
     },
     instructor_id: {
@@ -27,14 +27,14 @@ const yogaClassSchema = new mongoose.Schema(
     },
     
     start_time: {
-      type: Time,
+      type: Date,
       required: true,
     },
     end_time: {
-      type: Time,
+      type: Date,
       required: true,
     },
   },
 );
 
-module.exports = mongoose.model("User", yogaClassSchema);
+module.exports = mongoose.model("Yoga_Class", yogaClassSchema,"yoga_class");

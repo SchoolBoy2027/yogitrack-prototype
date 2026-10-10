@@ -24,13 +24,17 @@ body {
   background-size: 100% 100vh;
   width: 100%;
   background-position: center;
-  overflow-x: scroll;
-  overflow-y: scroll;
+
+}
+div.dt-column-title{
+  text-align: center;
 }
 
 #mainMenu {
   background-color: black;
   color: white;
+  height: auto;
+
 }
 
 footer {
@@ -44,31 +48,31 @@ a{
 }
 
 
-.logo {
-  height: 50px;
-  width: 50px;
-
-}
-
 table {
   width: 100%;
 }
 
-table thead tr th {
+table.dataTable thead tr th {
   background-color:transparent;
-  color:whitesmoke;
+  color:white;
   text-align: center;
   border: 1px;
 }
 
 .card {
-  width: 10%;
-  background-color: black;
+  width: 15%;
+  background-color: transparent;
+  border: none;
 
 
   .card-img-top {
     background-color: black;
     padding: 2%;
+     max-height: 250px;
+    width: auto;
+  }
+  .row {
+   width:100%;
   }
 }
 
@@ -93,13 +97,38 @@ table thead tr th {
   width: 75px;
   height: 75px;
 }
+.yogalogo {
+    background-position: center;
+    background-size: 75px 75px;
+    width: 75px;
+    height: 75px;
+    transition: transform 0.2s ease;
+}
+
+.yogalogo:hover {
+    transform: scale(2);
+}
 
 .logo {
-  background-image: url('./assets/CoyoteIcon.png');
-  background-position: center;
-  background-size: 75px 75px;
-  width: 75px;
-  height: 75px;
+    background-image: url('./assets/CoyoteIcon.png');
+    background-position: center;
+    background-size: 75px 75px;
+    width: 75px;
+    height: 75px;
+    transition: transform 0.2s ease;
+}
+
+.logo:hover {
+    transform: scale(3);
+}
+
+button.update:hover{
+  background-color:darkgreen;
+}
+
+button.delete:hover{
+  background-color: darkred;
+  
 }
 
 
@@ -130,6 +159,16 @@ table thead tr th {
   justify-self: center;
   color: white;
 }
+
+.userForm2 {
+  width: 800px;
+  border: solid;
+  border-color: black;
+  border-width: 10px;
+  justify-self: center;
+  color: white;
+}
+
 
 .loginForm {
   display: block;

@@ -1,0 +1,62 @@
+[
+  {
+    "user_id": "I0002",
+    "role": "Instructor",
+    "fname": "Sarah",
+    "lname": "Johnson",
+    "address": "145 Oak Street",
+    "city": "Oklahoma City",
+    "state": "OK",
+    "zip": "73102",
+    "phone": "405-555-1022",
+    "communication_preference": "Phone",
+    "email": "Sarah.Johnson@cox.com",
+    "password": "xxxxxxxxxxxxxxxxxxxx",
+    "mustChangePassword": true
+  },
+  {
+    "user_id": "I0003",
+    "role": "Instructor",
+    "fname": "David",
+    "lname": "Martinez",
+    "address": "7824 Sunset Drive",
+    "city": "Dallas",
+    "state": "TX",
+    "zip": "75201",
+    "phone": "214-555-3077",
+    "communication_preference": "Email",
+    "email": "David.Martinez@cox.com",
+    "password": "xxxxxxxxxxxxxxxxxxxx",
+    "mustChangePassword": true
+  },
+  {
+    "user_id": "I0004",
+    "role": "Instructor",
+    "fname": "Jennifer",
+    "lname": "Williams",
+    "address": "329 Pine Avenue",
+    "city": "Denver",
+    "state": "CO",
+    "zip": "80202",
+    "phone": "303-555-4188",
+    "communication_preference": "Phone",
+    "email": "Jennifer.Williams@cox.com",
+    "password": "xxxxxxxxxxxxxxxxxxxx",
+    "mustChangePassword": true
+  },
+  {
+    "user_id": "I0005",
+    "role": "Instructor",
+    "fname": "Robert",
+    "lname": "Thompson",
+    "address": "516 Maple Road",
+    "city": "Tulsa",
+    "state": "OK",
+    "zip": "74103",
+    "phone": "918-555-5299",
+    "communication_preference": "Email",
+    "email": "Robert.Thompson@cox.com",
+    "password": "xxxxxxxxxxxxxxxxxxxx",
+    "mustChangePassword": true
+  }
+]

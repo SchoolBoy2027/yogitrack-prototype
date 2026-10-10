@@ -4,45 +4,72 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import addButton from "./assets/btn-Add.png";
 import editButton from "./assets/editButton.png";
+import DDTable from "./components/DDTable";
 
-function UpdateCustomer() {
+/**
+ * ViewCustomer()
+ * @returns List of Customers
+ */
 
-    const { id } = useParams();
+function ViewCustomer2() {
 
-    const [customer, setCustomer] = useState(null);
+    const [customers, setCustomers] = useState([]);
 
     useEffect(() => {
 
-        fetch(`/api/customers/${id}`)
+        fetch("/api/customers")
             .then((response) => {
                 console.log("Status:", response.status);
+                console.log("Content-Type:", response.headers.get("content-type"));
 
                 return response.json();
             })
             .then((data) => {
-                console.log("Customer:", data);
-                setCustomer(data);
+                console.log("Customers:", data);
+                setCustomers(data);
             })
             .catch((error) => {
-                console.error("Error fetching customer:", error);
+                console.error("Error fetching customers:", error);
             });
 
-    }, [id]);
+    }, []);
+
+    /**
+     *  getEditRoute()
+     * @returns routing string
+     */
+    function getEditRoute() {
+        return "/Customer/Edit/";
+    }
+    /**
+     *  getAddRoute()
+     * @returns routing string
+     */
+
+    function getAddRoute() {
+        return "/Customer/Add/";
+    }
 
     return (
-        <div>
-            <h1>Customer</h1>
-
-            {customer && (
-                <div>
-                    <p>ID: {customer.customer_id}</p>
-                    <p>First Name: {customer.fname}</p>
-                    <p>Last Name: {customer.lname}</p>
-                    <p>Email: {customer.email}</p>
-                    <p>Phone: {customer.phone}</p>
+        <>
+            <div className="container-fluid">
+                <div className="container-fluid fs-1 bg-bg-transparent text-white fw-bold left">
+                    <div className="col-12" >
+                        <a href={getAddRoute()}  ><img className="addButton" alt="Missing" src={addButton} title="Add Customer" /> </a>
+                        View Customers
+                    </div>
                 </div>
-            )}
-        </div>
+
+                <DDTable
+                    data={customers}
+                    actionPath={(row) => `/Customer/Edit/${row.customer_id}`}
+                    actionImage={editButton}
+                />
+
+
+            </div>
+
+        </>
     );
 }
 
@@ -75,18 +102,18 @@ function ViewCustomer() {
     }, []);
 
     /**
-     *  getEditButton()
+     *  getEditRoute()
      * @returns routing string
      */
-    function getEditButton() {
+    function getEditRoute() {
         return "/Customer/Edit/";
     }
     /**
-     *  getAddButton()
+     *  getAddRoute()
      * @returns routing string
      */
 
-    function getAddButton() {
+    function getAddRoute() {
         return "/Customer/Add/";
     }
 
@@ -108,7 +135,7 @@ function ViewCustomer() {
             <div className="container-fluid">
                 <div className="container-fluid fs-1 bg-dark text-white fw-bold left">
                     <div className="col-12" >
-                        <a href={getAddButton()}  ><img className="addButton" alt="Missing" src={addButton} title="Add Customer" /> </a>
+                        <a href={getAddRoute()}  ><img className="addButton" alt="Missing" src={addButton} title="Add Customer" /> </a>
                         View Customers
                     </div>
                 </div>
@@ -143,7 +170,7 @@ function ViewCustomer() {
                                 <td>{customer.phone}</td>
                                 <td>{customer.email}</td>
                                 <td>{customer.communication_preference}</td>
-                                <td><a href={getEditButton() + customer.customer_id} title={'Edit ' + customer.fname + ' ' + customer.lname} ><img className="editButton" alt="Missing" src={editButton} /> </a></td>
+                                <td><a href={getEditRoute() + customer.customer_id} title={'Edit ' + customer.fname + ' ' + customer.lname} ><img className="editButton" alt="Missing" src={editButton} /> </a></td>
 
                             </tr>
                         ))}
@@ -204,7 +231,7 @@ function CreateCustomer(action, id) {
             if (response.ok) {
                 msg.innerHTML = "Customer saved successfully!";
             } else {
-                msg.innerHTML = "Error: " + data.message + " Error "+ data.error;
+                msg.innerHTML = "Error: " + data.message + " Error " + data.error;
             }
 
         } catch (error) {
@@ -227,7 +254,7 @@ function CreateCustomer(action, id) {
                         <div className="col-10">
                             <p className="p-3 fs-3 fw-bold text-white">{`${action.action}`} Customer</p>
                         </div>
-                        <div className="col-1 fs-3 pr-3 fw-bold text-white  order-dark border-solid" title="Not functional yet">
+                        <div className="col-1 fs-3 pr-3 fw-bold text-white  order-dark border-solid" title="Return to View">
                             <a href="/Customer/View">
                                 <div className="btnClose FS5 text text-white">X</div>
                             </a>
@@ -622,10 +649,10 @@ function CustomerAction(action, id) {
             return <UpdateDeleteCustomer action="Update" id={id} />;
 
         case "View":
-            return <ViewCustomer />;
+            return <ViewCustomer2 />;
 
         default:
-            return <ViewCustomer />;
+            return <ViewCustomer2 />;
     }
 }
 
