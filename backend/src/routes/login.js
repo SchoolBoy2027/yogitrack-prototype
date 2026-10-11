@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
         // Check required fields
 
         if (!user_id || !password) {
-
+            console.log("Soemthing blank.", "User ID and password are required.");
             return res.status(400).json({
                 message: "User ID and password are required."
             });
@@ -38,10 +38,12 @@ router.post("/", async (req, res) => {
         // Do not reveal whether the user exists
 
         if (!user) {
-
+            console.log('user not found!', user_id);
             return res.status(401).json({
                 message: "Invalid user ID or password."
             });
+        }else{
+            console.log('user found!');
         }
 
 
@@ -58,6 +60,7 @@ router.post("/", async (req, res) => {
 
 
         if (!passwordMatch) {
+            console.log("Invalid user ID or password.");
 
             return res.status(401).json({
                 message: "Invalid user ID or password."
@@ -66,7 +69,7 @@ router.post("/", async (req, res) => {
 
 
         // Successful login
-
+        console.log("Login successful");
         res.json({
 
             message: "Login successful",

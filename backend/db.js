@@ -1,16 +1,18 @@
 const mongoose = require("mongoose");
+const BLogic = require("./src/library/BLogic");
+const Dbg = require("./src/library/Dbg");
 
 
-console.log("MONGO_URI exists:", !!process.env.MONGO_URI);
+Dbg.LogIt2("MONGO_URI exists:", !!process.env.MONGO_URI);
 const connectDB = async () => {
     try {
         await mongoose.connect(process.env.MONGO_URI);
 
-        console.log('MongoDB connected ');
+        Dbg.LogIt('MongoDB connected ');
     } catch (error) {
-            console.error("MongoDB connection failed:");
-            console.error("Name:", error.name);
-            console.error("Message:", error.message);
+            Dbg.LogIt("MongoDB connection failed:");
+            Dbg.LogIt("Name:", error.name);
+            Dbg.ConsoleErr("Message:", error.message);
         process.exit(1);
     }
 };

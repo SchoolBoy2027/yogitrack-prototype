@@ -38,10 +38,10 @@ function Login2() {
       const data = await response.json();
 
       if (!response.ok) {
-        setResponseMessage(data.message || "Invalid user ID or password.");
-        //  return;   //todo fix this, not sure what is going on.  
+          setResponseMessage(data.message || "Invalid user ID or password.");
+          return;   
       }
-      data.user = "M0001";      //remove when fixed
+  //    data.user = "M0001";      //remove when fixed
       login(data.user);
       setLoggedInUser(data.user);
 

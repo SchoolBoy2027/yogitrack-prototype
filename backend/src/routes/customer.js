@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Customer = require("../models/Customer");
+const BLogic = require("../library/BLogic");
 
 console.log("CUSTOMER ROUTES LOADED");
 
@@ -67,7 +68,7 @@ router.post("/", async (req, res) => {
     const customer_id = await generateCustomerId();
 
     // Create the user with the generated ID
-    const customer = new User({
+    const customer = new Customer({
       ...req.body,                                  // copy submitted fields, spread operator
       customer_id: customer_id                    // generate the ID
     });

@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Yoga_Class = require("../models/Yoga_Class");
+const BLogic = require("../library/BLogic");
 
 console.log("YOGA_CLASS ROUTES LOADED");
 

@@ -11,6 +11,9 @@ import Customer from "./Customer.jsx";
 import Sale from "./Sale.jsx";
 import ClassPackage from "./ClassPackage.jsx";
 import ClassSchedule from "./ClassSchedule";
+import AttendanceList from "./AttendanceList.jsx";
+
+
 import Login from "./Login.jsx";
 import Footer from "./Footer.jsx";
 import Header from "./Header.jsx";
@@ -18,6 +21,8 @@ import Header from "./Header.jsx";
 import IsLoggedIn from "./IsLoggedIn.jsx";      //security wrapper for the site below.
 
 import { AuthProvider } from "./AuthContext";
+import InstructorReport from "./InstructorReport.jsx";
+import Report from "./Report.jsx";
 
 
 function Layout() {
@@ -27,11 +32,11 @@ function Layout() {
   return (
     <>
 
-      {!hideHeader && (  <Header />  )}
-     <main className="position-fixed start-0 end-0 overflow-auto mt-5" style={{ height: "70vh" }} >
-      <div className="container-fluid mt-3">
-      <Routes>
-          <Route element={<IsLoggedIn />}>
+      {!hideHeader && (<Header />)}
+      <main className="position-fixed start-0 end-0 overflow-auto mt-5" style={{ height: "85vh" }} >
+        <div className="container-fluid mt-3">
+          <Routes>
+            <Route element={<IsLoggedIn />}>
               <Route path="/Customer/:action" element={<Customer />} />
               <Route path="/Customer/:action/:id" element={<Customer />} />
               <Route path="/User/:action" element={<User />} />
@@ -42,12 +47,16 @@ function Layout() {
               <Route path="/Sale/:action/:id" element={<Sale />} />
               <Route path="/ClassPackage/:action" element={<ClassPackage />} />
               <Route path="/ClassPackage/:action/:id" element={<ClassPackage />} />
-               <Route path="/ClassSchedule/View" element={<ClassSchedule />} />
+              <Route path="/ClassSchedule/View" element={<ClassSchedule />} />
+              <Route path="/InstructorReport/View" element={<InstructorReport />} />
+              <Route path="/InstructorReport/Attendance" element={<AttendanceList />} />
+              <Route path="/Report/View" element={<Report />} />
+
               <Route path="/Dashboard" element={<App />} />
-          </Route>
-          <Route path="*" element={<Login />} />  /* The catch all, login redirects to the dashboard */
-      </Routes>
-      </div>
+            </Route>
+            <Route path="*" element={<Login />} />  /* The catch all, login redirects to the dashboard */
+          </Routes>
+        </div>
       </main>
     </>
   );
@@ -57,9 +66,9 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <BrowserRouter>
       <AuthProvider>
-        
+
         <Layout />
-        
+
       </AuthProvider>
       <footer className="fixed-bottom" style={{ height: "10vh" }}>
         <Footer />

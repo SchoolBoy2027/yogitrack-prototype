@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Sale = require("../models/Sale");
+const BLogic = require("../library/BLogic");
 
 console.log("SALES ROUTES LOADED");
 

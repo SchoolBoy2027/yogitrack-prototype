@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const Class_Package = require("../models/Class_Package");
+const BLogic = require("../library/BLogic");
 
 console.log("CLASS_PACKAGE ROUTES LOADED");
 

@@ -11,13 +11,16 @@ const saleRoutes = require("./src/routes/sale");
 const yoga_classRoutes = require("./src/routes/yoga_class");
 const class_packageRoutes = require("./src/routes/class_package");
 const dashboardMainRoutes = require("./src/routes/dashboard_main");
+const dashboardInstructorRoutes = require("./src/routes/dashboard_instructor");
+const dashboardManagerRoutes = require("./src/routes/dashboard_manager");
 const loginRoutes = require("./src/routes/login");
+const BLogic = require("./src/library/BLogic");
+const Dbg = require("./src/library/Dbg");
+
 const path = require("path");
-const START_FRONTEND = true;           //set prior to deployment
+const START_FRONTEND = false;           //set prior to deployment
 
 path.join(__dirname, "../client/dist");
-
-
 
 connectDB();
 
@@ -32,6 +35,8 @@ app.use("/api/class_packages", class_packageRoutes);
 app.use("/api/sales", saleRoutes);
 app.use("/api/login", loginRoutes);
 app.use("/api/dashboard-main", dashboardMainRoutes);
+app.use("/api/dashboard-instructor", dashboardInstructorRoutes);
+app.use("/api/dashboard-manager", dashboardManagerRoutes);
 
 
 
@@ -46,9 +51,9 @@ if (START_FRONTEND) {
         res.sendFile(path.join(frontendPath, "index.html"));
     });
 
-    console.log("React frontend enabled");
+   Dbg.LogIt("React frontend enabled");
 } else {
-    console.log("React frontend disabled, start manually! ");
+    Dbg.LogIt("React frontend disabled, start manually! ");
 }
 
     const PORT = process.env.PORT || 5000;
@@ -56,5 +61,5 @@ if (START_FRONTEND) {
 
 
 app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+    Dbg.LogIt(`Server running on port ${PORT}`);
 });

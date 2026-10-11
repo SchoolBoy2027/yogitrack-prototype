@@ -5,72 +5,16 @@ import { useParams } from "react-router-dom";
 import addButton from "./assets/btn-Add.png";
 import editButton from "./assets/editButton.png";
 import DDTable from "./components/DDTable";
+import DBF from "./library/DBF";
+
 
 /**
- * ViewCustomer()
- * @returns List of Customers
+ *  getAddRoute()
+ * @returns routing string
  */
 
-function ViewCustomer2() {
-
-    const [customers, setCustomers] = useState([]);
-
-    useEffect(() => {
-
-        fetch("/api/customers")
-            .then((response) => {
-                console.log("Status:", response.status);
-                console.log("Content-Type:", response.headers.get("content-type"));
-
-                return response.json();
-            })
-            .then((data) => {
-                console.log("Customers:", data);
-                setCustomers(data);
-            })
-            .catch((error) => {
-                console.error("Error fetching customers:", error);
-            });
-
-    }, []);
-
-    /**
-     *  getEditRoute()
-     * @returns routing string
-     */
-    function getEditRoute() {
-        return "/Customer/Edit/";
-    }
-    /**
-     *  getAddRoute()
-     * @returns routing string
-     */
-
-    function getAddRoute() {
-        return "/Customer/Add/";
-    }
-
-    return (
-        <>
-            <div className="container-fluid">
-                <div className="container-fluid fs-1 bg-bg-transparent text-white fw-bold left">
-                    <div className="col-12" >
-                        <a href={getAddRoute()}  ><img className="addButton" alt="Missing" src={addButton} title="Add Customer" /> </a>
-                        View Customers
-                    </div>
-                </div>
-
-                <DDTable
-                    data={customers}
-                    actionPath={(row) => `/Customer/Edit/${row.customer_id}`}
-                    actionImage={editButton}
-                />
-
-
-            </div>
-
-        </>
-    );
+function getAddRoute() {
+    return "/Customer/Add/";
 }
 
 /**
@@ -101,81 +45,21 @@ function ViewCustomer() {
 
     }, []);
 
-    /**
-     *  getEditRoute()
-     * @returns routing string
-     */
-    function getEditRoute() {
-        return "/Customer/Edit/";
-    }
-    /**
-     *  getAddRoute()
-     * @returns routing string
-     */
-
-    function getAddRoute() {
-        return "/Customer/Add/";
-    }
-
-    /**
-     * getEditIcon()
-     * @returns image string
-     */
-
-    function getEditIcon() {
-        return "/src/assets/editButton.png";
-    }
-
-
-    function getAddIcon() {
-        return "/src/assets/btn-Add.png";
-    }
     return (
         <>
             <div className="container-fluid">
-                <div className="container-fluid fs-1 bg-dark text-white fw-bold left">
+                <div className="container-fluid fs-1 bg-bg-transparent text-white fw-bold left">
                     <div className="col-12" >
                         <a href={getAddRoute()}  ><img className="addButton" alt="Missing" src={addButton} title="Add Customer" /> </a>
                         View Customers
                     </div>
                 </div>
 
-
-                <table id="yogaTable" className=" mt-1  table table-primary overflow-scroll sticky-top">
-                    <thead >
-                        <tr className="bg-bg-dark">
-                            <th>ID</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Address</th>
-                            <th>City</th>
-                            <th>State</th>
-                            <th>Zip Code</th>
-                            <th>Phone</th>
-                            <th>Email</th>
-                            <th>Preference</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {customers.map((customer) => (
-                            <tr key={customer.customer_id}>
-                                <td> {customer.customer_id}</td>
-                                <td>{customer.fname}</td>
-                                <td>{customer.lname}</td>
-                                <td>{customer.address}</td>
-                                <td>{customer.city}</td>
-                                <td>{customer.state}</td>
-                                <td>{customer.zip}</td>
-                                <td>{customer.phone}</td>
-                                <td>{customer.email}</td>
-                                <td>{customer.communication_preference}</td>
-                                <td><a href={getEditRoute() + customer.customer_id} title={'Edit ' + customer.fname + ' ' + customer.lname} ><img className="editButton" alt="Missing" src={editButton} /> </a></td>
-
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                <DDTable
+                    data={customers}
+                    actionPath={(row) => `/Customer/Edit/${row.customer_id}`}
+                    actionImage={editButton}
+                />
 
 
             </div>
@@ -183,8 +67,6 @@ function ViewCustomer() {
         </>
     );
 }
-//    
-//    ${id}
 
 /**
  * CreateCustomer(action, id)
@@ -199,7 +81,7 @@ function CreateCustomer(action, id) {
         const formData = new FormData(form);
 
         const customer = {
-            customer_id: formData.get("customer_id"),
+            customer_id: "C0000",
             fname: formData.get("fName"),
             lname: formData.get("lName"),
             address: formData.get("address"),
@@ -211,32 +93,36 @@ function CreateCustomer(action, id) {
             communication_preference: formData.get("communication"),
             customer_type: formData.get("type")
         };
+        
+        if (await DBF.duplicateCustomerCheck(customer.fname, customer.lname)) {
+            console.log("Sending customer:", customer);
+            let msg = document.getElementById("response");
+            try {
+                const response = await fetch("/api/customers", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(customer)
+                });
 
-        console.log("Sending customer:", customer);
-        let msg = document.getElementById("response");
-        try {
-            const response = await fetch("/api/customers", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(customer)
-            });
+                const data = await response.json();
 
-            const data = await response.json();
-
-            console.log("Server response:", data);
+                console.log("Server response:", data);
 
 
-            if (response.ok) {
-                msg.innerHTML = "Customer saved successfully!";
-            } else {
-                msg.innerHTML = "Error: " + data.message + " Error " + data.error;
+                if (response.ok) {
+                    msg.innerHTML = "Customer saved successfully!";
+                } else {
+                    msg.innerHTML = "Error: " + data.message + " Error " + data.error;
+                }
+
+            } catch (error) {
+                console.error("Error saving customer:", error);
+                msg.innerHTML = "Could not connect to the server." + error;
             }
-
-        } catch (error) {
-            console.error("Error saving customer:", error);
-            msg.innerHTML = "Could not connect to the server." + error;
+        }else {
+            console.log("Create canceled due to duplicate");
         }
     };
 
@@ -262,13 +148,7 @@ function CreateCustomer(action, id) {
                     </div>
                     <div className="row pb-1 border-bottom border-dark border-solid">
 
-                        <div className="col-3">
-                            <label htmlFor="id" className="formLabel fs-6 fw-bold">Customer ID:</label>
-                        </div>
-                        <div className="col-2">
-                            <input type="text" name="customer_id" className="formInput" />
-                        </div>
-                        <div className="col-3">
+                        <div className="col-4">
                             <label htmlFor="type" className="formLabel fs-5 fw-bold">Customer Type:</label>
                         </div>
                         <div className="col-3">
@@ -280,18 +160,16 @@ function CreateCustomer(action, id) {
                     </div>
 
                     <div className="row p-3 border-bottom border-dark border-solid  ">
-                        <div className="col-4">
+                        <div className="col-2">
                             <label htmlFor="fName" className="formLabel fs-5 fw-bold">First Name:</label>
                         </div>
-                        <div className="col-8">
+                        <div className="col-4">
                             <input type="text" name="fName" className="formInput" />
                         </div>
-                    </div>
-                    <div className="row p-3 border-bottom border-dark border-solid">
-                        <div className="col-4 ">
+                        <div className="col-2 ">
                             <label htmlFor="lName" className="formLabel fs-5 fw-bold">Last Name:</label>
                         </div>
-                        <div className="col-8">
+                        <div className="col-4">
                             <input type="text" name="lName" className="formInput" />
                         </div>
                     </div>
@@ -327,8 +205,6 @@ function CreateCustomer(action, id) {
                         </div>
                     </div>
 
-
-
                     <div className="row p-3 border-bottom border-dark  border-solid">
                         <div className="col-2">
                             <label htmlFor="phone" className="formLabel fs-5 fw-bold">Phone:</label>
@@ -337,27 +213,21 @@ function CreateCustomer(action, id) {
                             <input type="tel" name="phone" id="phone" className="formInput" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" />
                         </div>
 
-                        <div className="row p-3 border-bottom border-dark border-solid">
-                            <div className="col-2">
-                                <label htmlFor="email" className="formLabel fs-5 fw-bold">
-                                    Email:
-                                </label>
-                            </div>
-
-                            <div className="col-10">
-                                <input
-                                    type="email"
-                                    name="email"
-                                    id="email"
-                                    className="formInput"
-                                />
-                            </div>
+                        <div className="col-2">
+                            <label htmlFor="email" className="formLabel fs-5 fw-bold">
+                                Email:
+                            </label>
                         </div>
+                        <div className="col-4">
+                            <input type="email" name="email" id="email" className="formInput" />
+                        </div>
+                    </div>
 
-                        <div className="col-3">
+                    <div className="row p-3 border-bottom border-dark  border-solid">
+                        <div className="col-6">
                             <label htmlFor="communication" className="formLabel fs-5 fw-bold">Mode of Communication</label>
                         </div>
-                        <div className="col-3">
+                        <div className="col-4">
                             <select id="communication" name="communication" className="formInput">
                                 <option value="Phone" >Phone</option>
                                 <option value="Email" >Email</option>
@@ -501,8 +371,6 @@ function UpdateDeleteCustomer(action) {
 
     return (
         <>
-
-
             {customer && (
                 <div>
 
@@ -542,17 +410,17 @@ function UpdateDeleteCustomer(action) {
                             </div>
 
                             <div className="row pb-1 border-bottom border-dark border-solid">
-                                <div className="col-2 ">
-                                    <label htmlFor="lName" className="formLabel fs-6 fw-bold">Last Name:</label>
-                                </div>
-                                <div className="col-4">
-                                    <input type="text" name="lName" className="formInput" defaultValue={customer.lname} />
-                                </div>
                                 <div className="col-2">
                                     <label htmlFor="fName" className="formLabel fs-6 fw-bold">First Name:</label>
                                 </div>
                                 <div className="col-4">
                                     <input type="text" name="fName" className="formInput" defaultValue={customer.fname} />
+                                </div>
+                                <div className="col-2 ">
+                                    <label htmlFor="lName" className="formLabel fs-6 fw-bold">Last Name:</label>
+                                </div>
+                                <div className="col-4">
+                                    <input type="text" name="lName" className="formInput" defaultValue={customer.lname} />
                                 </div>
                             </div>
 
@@ -649,10 +517,10 @@ function CustomerAction(action, id) {
             return <UpdateDeleteCustomer action="Update" id={id} />;
 
         case "View":
-            return <ViewCustomer2 />;
+            return <ViewCustomer />;
 
         default:
-            return <ViewCustomer2 />;
+            return <ViewCustomer />;
     }
 }
 

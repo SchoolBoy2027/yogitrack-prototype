@@ -113,7 +113,7 @@ export default function ClassSchedule() {
   };
 
   if (loading) {
-    return <p>Loading class schedule...</p>;
+    return <p>Please wait while we get our act together...</p>;
   }
 
   if (error) {
@@ -206,15 +206,13 @@ export default function ClassSchedule() {
                       <div className="schedule-events">
                         {dayClasses.map((item) => (
                           <div
-                            className="schedule-event"
+                            className={`schedule-event-${item.yoga_class_type }`}
                             key={item.yoga_class_id}
-                            title={`${item.yoga_class_type} — ${item.instructor_name || "Instructor not assigned"}`}
+                            title={`${item.yoga_class_type} — ${item.instructor_name}`}
                           >
-                            <strong>{item.yoga_class_type}</strong>
 
                             <span>
-                              {item.instructor_name ||
-                                "Instructor not assigned"}
+                              {item.instructor_name}
                             </span>
 
                             <span className="schedule-event-time">
@@ -226,7 +224,7 @@ export default function ClassSchedule() {
 
                         {dayClasses.length === 0 && (
                           <div className="schedule-no-classes">
-                            No classes
+                
                           </div>
                         )}
                       </div>

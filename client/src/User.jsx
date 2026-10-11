@@ -11,6 +11,7 @@ import FormHelp from './library/FormHelp';
 
 
 
+
 /**
  *  getAddRoute()
  * @returns routing string
@@ -104,24 +105,28 @@ function CreateUser(action, id) {
       communication_preference: formData.get("communication")
     };
 
-    FormHelp.LogIt2("Sending user:", user);
-    let msg = document.getElementById("response");
-    try {
-      const response = await fetch("/api/users", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(user)
-      });
+      if (await DBF.duplicateCustomerCheck(customer.fname, customer.lname)) 
+      {
+        FormHelp.LogIt2("Sending user:", user);
+        try {
+          const response = await fetch("/api/users", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(user)
+          });
 
-      const data = await response.json();
+          const data = await response.json();
 
-      FormHelp.LogIt2("Server response:", data);
-      FormHelp.ErrCheck(response);
+          FormHelp.LogIt2("Server response:", data);
+          FormHelp.ErrCheck(response);
 
-    } catch (error) {
-      FormHelp.DisplayErr(error);
+        } catch (error) {
+          FormHelp.DisplayErr(error);
+        }
+    } else {
+          console.log("Create canceled due to duplicate");
     }
   };
 

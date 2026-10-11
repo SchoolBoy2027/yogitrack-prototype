@@ -1,0 +1,88 @@
+[{
+  "_id": {
+    "$oid": "6aca801dbab21874b740aa54"
+  },
+  "id": "schedule",
+  "title": "Schedule",
+  "path": "/ClassSchedule/View",
+  "image": "scheduleLogo.png",
+  "order": 1,
+  "is_active": true
+},
+{
+  "_id": {
+    "$oid": "6aca801dbab21874b740aa55"
+  },
+  "id": "customers",
+  "title": "Customers",
+  "path": "/Customer/View",
+  "image": "customerLogo.png",
+  "order": 2,
+  "is_active": true
+},
+{
+  "_id": {
+    "$oid": "6aca801dbab21874b740aa56"
+  },
+  "id": "yoga-classes",
+  "title": "Yoga Classes",
+  "path": "/YogaClass/View",
+  "image": "classLogo.png",
+  "order": 3,
+  "is_active": true
+},
+{
+  "_id": {
+    "$oid": "6aca801dbab21874b740aa57"
+  },
+  "id": "instructors",
+  "title": "Instructors",
+  "path": "/User/View",
+  "image": "instructorLogo.png",
+  "order": 4,
+  "is_active": true
+},
+{
+  "_id": {
+    "$oid": "6aca801dbab21874b740aa58"
+  },
+  "id": "sales",
+  "title": "Sales",
+  "path": "/Sale/View",
+  "image": "salesLogo.png",
+  "order": 5,
+  "is_active": true
+},
+{
+  "_id": {
+    "$oid": "6aca801dbab21874b740aa59"
+  },
+  "id": "class-packages",
+  "title": "Class Packages",
+  "path": "/ClassPackage/View",
+  "image": "packageLogo.png",
+  "order": 6,
+  "is_active": true
+},
+{
+  "_id": {
+    "$oid": "6aca801dbab21874b740aa5a"
+  },
+  "id": "reports",
+  "title": "Reports",
+  "path": "/Report/View",
+  "image": "reportsLogo.png",
+  "order": 7,
+  "is_active": true
+},
+{
+  "_id": {
+    "$oid": "6aca801dbab21874b740aa5b"
+  },
+  "id": "instructor-reports",
+  "title": "Instructor Reports",
+  "path": "/InstructorReport/View",
+  "image": "instructorReportsLogo.png",
+  "order": 8,
+  "is_active": true
+}]
