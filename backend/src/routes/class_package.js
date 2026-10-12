@@ -8,9 +8,9 @@ console.log("CLASS_PACKAGE ROUTES LOADED");
 
 /**  you won't stay here.  
  */
-function buildClassPackageId(package_category, class_type, number_of_classes) {
+function buildClassPackageId(package_category, yoga_class_type, number_of_classes) {
     const category = package_category.charAt(0).toUpperCase();
-    const type = class_type.charAt(0).toUpperCase();
+    const type = yoga_class_type.charAt(0).toUpperCase();
     const classes = number_of_classes === 1000 ? "U" : number_of_classes;
 
     return `${category}${type}${classes}`;
@@ -83,13 +83,13 @@ router.post("/", async (req, res) => {
   try {
     const {                             //ES6 extracting variables from the req.body structure
       package_category,
-      class_type,
+      yoga_class_type,
       number_of_classes
     } = req.body;
 
     const class_package_id = await buildClassPackageId(
       package_category,
-      class_type,
+      yoga_class_type,
       number_of_classes
     );
 

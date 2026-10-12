@@ -12,7 +12,7 @@ import Sale from "./Sale.jsx";
 import ClassPackage from "./ClassPackage.jsx";
 import ClassSchedule from "./ClassSchedule";
 import AttendanceList from "./AttendanceList.jsx";
-
+import AttendanceReport from "./AttendanceReport.jsx";
 
 import Login from "./Login.jsx";
 import Footer from "./Footer.jsx";
@@ -22,8 +22,7 @@ import IsLoggedIn from "./IsLoggedIn.jsx";      //security wrapper for the site 
 
 import { AuthProvider } from "./AuthContext";
 import InstructorReport from "./InstructorReport.jsx";
-import Report from "./Report.jsx";
-
+import ManagerReport from "./ManagerReport.jsx";
 
 function Layout() {
   const location = useLocation();
@@ -49,8 +48,9 @@ function Layout() {
               <Route path="/ClassPackage/:action/:id" element={<ClassPackage />} />
               <Route path="/ClassSchedule/View" element={<ClassSchedule />} />
               <Route path="/InstructorReport/View" element={<InstructorReport />} />
+              <Route path="/InstructorReport/AttendanceReport" element={<AttendanceReport />} />
               <Route path="/InstructorReport/Attendance" element={<AttendanceList />} />
-              <Route path="/Report/View" element={<Report />} />
+              <Route path="/Report/View" element={<ManagerReport />} />
 
               <Route path="/Dashboard" element={<App />} />
             </Route>

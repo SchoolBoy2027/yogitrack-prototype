@@ -28,7 +28,7 @@ async function generateCustomerId() {
 router.get("/", async (req, res) => {
   try {
     console.log("Finding customers....");
-    const customers = await Customer.find();
+    const customers = await Customer.find().populate("packages_purchased");
     console.log("Customers found:", customers.length);
     console.log("Customers:", customers);
     res.json(customers);

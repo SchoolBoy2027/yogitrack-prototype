@@ -17,7 +17,7 @@ function PackageSelect({ value, onChange }) {
             try {
                 const response = await fetch("/api/class_packages");
 
-                FormHelp.ErrCheckThrow(response,`PackageSelect`);
+                await FormHelp.ErrCheckThrow(response, `PackageSelect`);
 
                 const data = await response.json();
                 const activePackages = data.filter(
@@ -28,7 +28,7 @@ function PackageSelect({ value, onChange }) {
                 setPackages(activePackages);
 
             } catch (error) {
-             FormHelp.ConsoleErr("Error fetching class packages:", error);
+                FormHelp.ConsoleErr("Error fetching class packages:", error);
                 setError("Unable to load class packages.");
             } finally {
                 setLoading(false);

@@ -36,15 +36,22 @@ export default class FormHelp {
         * ErrCheckThrow(response, module)
         * Checks for response ok and if not throws an error to bomb the app.
         */
-    static ErrCheckThrow(response, module) {
+    static async ErrCheckThrow(response, module) {
+
 
         if (!response.ok) {
-            throw new Error(
-                FormHelp.LogIt2(`${module} Failed to fetch data:`, response.status)
-                    `Failed to fetch data: ${response.status}`
-            );
+            let message = `Failed to fetch data: ${response.status}`;
+            FormHelp.LogIt2(`${module} Failed to fetch data:`, response.status);
+
+        if (response.status === 409) {
+            const data = await response.json();
+            message = data.message;
+        }
+
+        throw new Error(message);
         }
     }
+
 
 
     /**

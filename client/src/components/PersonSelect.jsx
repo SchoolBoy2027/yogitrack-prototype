@@ -33,7 +33,7 @@ function PersonSelect({
 
         const response = await fetch(endpoint);
 
-        FormHelp.ErrCheckThrow(response, `PersonSelect`);
+        await FormHelp.ErrCheckThrow(response, `PersonSelect`);
 
         const data = await response.json();
 

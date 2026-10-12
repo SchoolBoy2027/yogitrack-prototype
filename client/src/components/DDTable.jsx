@@ -8,7 +8,10 @@ import JSZip from "jszip";
 DataTable.use(DT);
 DT.Buttons.jszip(JSZip);
 
-function DDTable({ data = [], actionPath, actionImage, hiddenColumns = [] }) {
+function DDTable({ data = [], actionPath, actionImage, 
+                    hiddenColumns = [], clickableColumns = [],
+                    onCellClick }) 
+{
     if (!data.length) {
         return <p>No data available.</p>;
     }
@@ -17,13 +20,25 @@ function DDTable({ data = [], actionPath, actionImage, hiddenColumns = [] }) {
         .filter((key) => !["_id", "__v", ...hiddenColumns].includes(key))
         .map((key) => ({
             data: key,
+            defaultContent:"",
+            createdCell: (cell, cellData) => {
+                if (clickableColumns.includes(key)) {
+                    cell.style.cursor = "pointer";
+                    cell.style.textDecoration = "underline";
+                    cell.onclick = () => onCellClick?.(cellData);
+                }
+            },
             title: key
                 .replace(/_/g, " ")
                 .replace(/\b\w/g, (char) => char.toUpperCase()),
-            render: (value) => {
-                if (!value) {
-                    return "";
-                }
+            render: (value, type, row) => {
+                    if (value === undefined || value === null) return "";
+                   if (typeof value === "object" && value.$numberDecimal) {
+                    return Number(value.$numberDecimal).toLocaleString("en-US", {
+                        style: "currency",
+                        currency: "USD"
+                    });
+                    }
 
                 if (key.toLowerCase().includes("date")) {
                     return new Date(value).toLocaleDateString("en-US", {

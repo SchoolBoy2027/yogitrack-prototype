@@ -15,15 +15,14 @@ const saleSchema = new mongoose.Schema(
             required: true,
         },
         
-        package_id: {
+        class_package_id: {
             type: String,
             required: true,
         },
-        sale_type: {
+        yoga_class_type: {
             type: String,
-            required: true,
+            required: false,
         },
-
         number_of_classes: {
             type: mongoose.Schema.Types.Int32,
             required: true

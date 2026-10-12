@@ -81,4 +81,47 @@ export default class DBF {
         }
         return retVal;
     }
+    /**
+     * getAttendanceCustomers(data, selectedClass)
+     * Filters out the ineligle customers based on class balance, 
+     * package dates and yoga_class_type
+     * @param {*} data 
+     * @param {*} selectedClass 
+     * @returns 
+     */
+    static getAttendanceCustomers(data, selectedClass) {
+        const classDate = new Date(selectedClass.yoga_class_date);
+        classDate.setUTCHours(0, 0, 0, 0);
+
+        const attendanceCustomers = data.filter((customer) => {
+            if (
+                Number(customer.balance) <= 0 ||
+                !customer.start_date ||
+                !customer.end_date
+            ) {
+                return false;
+            }
+
+            const startDate = new Date(customer.start_date);
+            const endDate = new Date(customer.end_date);
+
+            startDate.setUTCHours(0, 0, 0, 0);
+            endDate.setUTCHours(0, 0, 0, 0);
+
+            if (classDate < startDate || classDate > endDate) {
+                return false;
+            }
+
+            if (customer.yoga_class_type === "Special") {
+                return true;
+            }
+
+            return customer.yoga_class_type === "General" &&
+                selectedClass.yoga_class_type === "General";
+        });
+
+        return attendanceCustomers;
+    }
+
+
 }

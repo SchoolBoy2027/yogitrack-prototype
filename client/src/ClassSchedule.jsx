@@ -123,9 +123,9 @@ export default function ClassSchedule() {
   return (
     <div className="class-schedule">
         <div className="row fs-3 text-white fw-bold">
-            <div classname="col-5"></div>
-            <div classname="col-2">Class Schedule</div>
-            <div classname="col-5"></div>
+            <div className="col-5"></div>
+            <div className="col-2">Class Schedule</div>
+            <div className="col-5"></div>
         </div>
           <div className="row fs-3 text-white fw-bold ">
             

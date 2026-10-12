@@ -43,16 +43,33 @@ const customerSchema = mongoose.Schema({
     type: String,
     required: true
   },
-
-  balance: {
-    type: Number,
-    default: 0
-  },
   customer_type: {
     type: String,
     required: true
   },
 
+  balance: {
+    type: Number,
+    default: 0,
+    required: false
+  },
+
+  start_date: {
+    type: Date,
+    required: false
+  },
+  end_date: {
+    type: Date,
+    required: false
+  },
+    yoga_class_type: {
+    type: String,
+    required: false
+  },
+  packages_purchased: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Class_Package"
+  }],
 
 });
 

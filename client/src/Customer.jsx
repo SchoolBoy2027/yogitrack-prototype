@@ -6,6 +6,7 @@ import addButton from "./assets/btn-Add.png";
 import editButton from "./assets/editButton.png";
 import DDTable from "./components/DDTable";
 import DBF from "./library/DBF";
+import btnMinimize from "./assets/minimize.png";
 
 
 /**
@@ -64,6 +65,95 @@ function ViewCustomer() {
 
             </div>
 
+        </>
+    );
+}
+
+function ViewCustomer2() {
+
+    const [customers, setCustomers] = useState([]);
+    const [selectedCustomer, setSelectedCustomer] = useState(null);
+
+    useEffect(() => {
+
+        fetch("/api/customers")
+            .then((response) => {
+                console.log("Status:", response.status);
+                console.log("Content-Type:", response.headers.get("content-type"));
+
+                return response.json();
+            })
+            .then((data) => {
+                console.log("Customers:", data);
+                setCustomers(data);
+            })
+            .catch((error) => {
+                console.error("Error fetching customers:", error);
+            });
+
+    }, []);
+
+    const handleCustomerClick = (customerId) => {
+        const customer = customers.find((item) => item.customer_id === customerId);
+        setSelectedCustomer(customer);
+    };
+//  <div className={selectedCustomer ? "col-8" : "col-12"} style={{ minWidth: 0, overflowX: "auto"}}>
+    return (
+        <>
+            <div className="container-fluid">
+                <div className="container-fluid fs-1 bg-bg-transparent text-white fw-bold left">
+                    <div className="col-12">
+                        <a href={getAddRoute()}><img className="addButton" alt="Missing" src={addButton} title="Add Customer" /></a>
+                        View Customers
+                    </div>
+                </div>
+            <div className="container-fluid mt-5">
+                <div className="row">
+                  
+                <div className={selectedCustomer ? "col-8" : "col-12"} 
+                        style={{
+                            minWidth: 0,
+                            overflowX: selectedCustomer ? "auto" : "hidden",
+                            overflowY: selectedCustomer ? "auto" : "hidden",
+                        }}
+                
+                
+                >
+                        <DDTable
+                            data={customers}
+                            actionPath={(row) => `/Customer/Edit/${row.customer_id}`}
+                            actionImage={editButton}
+                            clickableColumns={["customer_id"]}
+                            onCellClick={handleCustomerClick}
+                            hiddenColumns={["packages_purchased"]}
+                        />
+                    </div>
+
+                    {selectedCustomer && (
+                        <div className="col-4 ps-5" style={{ minWidth: 0, overflowX: "auto" }}>
+                            <div className="row fs-5 text-white fw-bold align-items-center">
+                                <div className="col-2 fs-5 text-white fw-bold align-items-left">
+                                    <a
+                                        href="#"
+                                        onClick={(event) => {
+                                            event.preventDefault();
+                                            setSelectedCustomer(null);
+                                        }}
+                                    >
+                                        <img src={btnMinimize} alt="Hide Packages" height={"50px"} width={"50px"} />
+                                    </a>
+                                </div>
+                                Packages for {selectedCustomer.customer_id}
+                            </div>
+
+                            <DDTable
+                                data={selectedCustomer.packages_purchased || []}
+                            />
+                        </div>
+                    )}
+                </div>
+            </div>
+        </div>
         </>
     );
 }
@@ -517,10 +607,10 @@ function CustomerAction(action, id) {
             return <UpdateDeleteCustomer action="Update" id={id} />;
 
         case "View":
-            return <ViewCustomer />;
+            return <ViewCustomer2 />;
 
         default:
-            return <ViewCustomer />;
+            return <ViewCustomer2 />;
     }
 }
 

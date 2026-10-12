@@ -1,0 +1,33 @@
+[{
+  "_id": {
+    "$oid": "6aca801dbab21874b740aa54"
+  },
+  "id": "schedule",
+  "title": "Evaluation",
+  "path": "/InstructorReport/Eval",
+  "image": "scheduleLogo.png",
+  "order": 1,
+  "is_active": true
+},
+{
+  "_id": {
+    "$oid": "6aca801dbab21874b740aa55"
+  },
+  "id": "customers",
+  "title": "Attendance List",
+  "path": "/InstructorReport/Attendance",
+  "image": "customerLogo.png",
+  "order": 2,
+  "is_active": true
+},
+{
+  "_id": {
+    "$oid": "6acbdd9bbab21874b740aa68"
+  },
+  "id": "attendance_report",
+  "title": "Attendance Report",
+  "path": "/InstructorReport/AttendanceReport",
+  "order": 3,
+  "is_active": true,
+  "image": "customerLogo.png"
+}]

@@ -13,6 +13,8 @@ const class_packageRoutes = require("./src/routes/class_package");
 const dashboardMainRoutes = require("./src/routes/dashboard_main");
 const dashboardInstructorRoutes = require("./src/routes/dashboard_instructor");
 const dashboardManagerRoutes = require("./src/routes/dashboard_manager");
+const classAttendanceRoutes = require("./src/routes/class_attendance");
+
 const loginRoutes = require("./src/routes/login");
 const BLogic = require("./src/library/BLogic");
 const Dbg = require("./src/library/Dbg");
@@ -37,6 +39,8 @@ app.use("/api/login", loginRoutes);
 app.use("/api/dashboard-main", dashboardMainRoutes);
 app.use("/api/dashboard-instructor", dashboardInstructorRoutes);
 app.use("/api/dashboard-manager", dashboardManagerRoutes);
+app.use("/api/attendance", classAttendanceRoutes);
+
 
 
 

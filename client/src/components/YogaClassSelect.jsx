@@ -17,7 +17,7 @@ function YogaClassSelect({ value, onChange }) {
             try {
                 const response = await fetch("/api/yoga_classes");
 
-                FormHelp.ErrCheckThrow(response, "YogaClassSelect");
+                await FormHelp.ErrCheckThrow(response, "YogaClassSelect");
 
                 const data = await response.json();
                 const today = new Date().toISOString().slice(0, 10);
@@ -35,7 +35,7 @@ function YogaClassSelect({ value, onChange }) {
                 FormHelp.LogIt2("Yoga classes for today:", todaysYogaClasses);
                 setYogaClasses(todaysYogaClasses);
             } catch (error) {
-                FormHelp.ConsoleErr("Error fetching yoga classes:",error);
+                FormHelp.ConsoleErr("Error fetching yoga classes:", error);
                 setError("Unable to load yoga classes.");
             } finally {
                 setLoading(false);
@@ -51,45 +51,45 @@ function YogaClassSelect({ value, onChange }) {
 
     return (
         <>
-        <div className="row pb-1 border-bottom border-dark border-solid">
-            <div className="col-1">
-                <label
-                    htmlFor="yoga_class_id"
-                    className="formLabel fs-6 fw-bold ps-3"
-                >
-                    Yoga Class:
-                </label>
-                </div>
-            <div className="col-1">
-            <select
-                id="yoga_class_id"
-                name="yoga_class_id"
-                value={value || ""}
-                className="attendance-class-select ps-6"
-                onChange={(event) => {
-                    const selected = yoga_classes.find(
-                        (item) => item.yoga_class_id === event.target.value
-                    );
-
-                 //   console.log("Selected class:", selected);
-
-                    onChange(selected || null);
-                }}
-            >
-                <option value="">Select Yoga Class</option>
-
-                {yoga_classes.map((item) => (
-                    <option
-                        key={item.yoga_class_id}
-                        value={item.yoga_class_id}
+            <div className="row pb-1 border-bottom border-dark border-solid">
+                <div className="col-1">
+                    <label
+                        htmlFor="yoga_class_id"
+                        className="formLabel fs-6 fw-bold ps-3"
                     >
-                        {item.yoga_class_id} - {FormHelp.ToTimeLocal(item.start_time)}
-                    </option>
-                ))}
-            </select>
+                        Yoga Class:
+                    </label>
+                </div>
+                <div className="col-1">
+                    <select
+                        id="yoga_class_id"
+                        name="yoga_class_id"
+                        value={value || ""}
+                        className="attendance-class-select ps-6"
+                        onChange={(event) => {
+                            const selected = yoga_classes.find(
+                                (item) => item.yoga_class_id === event.target.value
+                            );
+
+                            //   console.log("Selected class:", selected);
+
+                            onChange(selected || null);
+                        }}
+                    >
+                        <option value="">Select Yoga Class</option>
+
+                        {yoga_classes.map((item) => (
+                            <option
+                                key={item.yoga_class_id}
+                                value={item.yoga_class_id}
+                            >
+                                {item.yoga_class_id} - {FormHelp.ToTimeLocal(item.start_time)}
+                            </option>
+                        ))}
+                    </select>
+                </div>
             </div>
-            </div>
-    </>
+        </>
     );
 }
 

@@ -14,7 +14,7 @@ const classPackageSchema = new mongoose.Schema(
             required: true,
         },
 
-        class_type: {
+        yoga_class_type: {
             type: String,
             required: true,
         },

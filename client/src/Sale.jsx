@@ -20,9 +20,9 @@ function ViewSale() {
       .then((response) => {
         FormHelp.LogIt2("Status:", response.status);
         FormHelp.LogIt2(
-                        "Content-Type:",
-                        response.headers.get("content-type")
-                      );
+          "Content-Type:",
+          response.headers.get("content-type")
+        );
 
         return response.json();
       })
@@ -70,7 +70,7 @@ function ViewSale() {
       return sale_id;
 
     } catch (error) {
-        FormHelp.ConsoleErr("Error checking sale numbers:", error);
+      FormHelp.ConsoleErr("Error checking sale numbers:", error);
       return null;
     }
   };
@@ -120,7 +120,7 @@ function CreateSale(action, id) {
   const [formData, setFormData] = useState({
     customer_id: "",
     package_id: "",
-    sale_type: "",
+    yoga_class_type: "",
     number_of_classes: "",
     price_paid: "",
     payment_method: "",
@@ -154,9 +154,9 @@ function CreateSale(action, id) {
           ...prev,
           package: packageId,
           number_of_classes: selectedPackage.number_of_classes,
-          price_paid: selectedPackage.cost.$numberDecimal,
+          price_paid: selectedPackage.cost,  //mod for NaN
           days: selectedPackage.days,
-          sale_type: selectedPackage.class_type
+          yoga_class_type: selectedPackage.class_type
         }));
       }
     }
@@ -176,7 +176,7 @@ function CreateSale(action, id) {
       price_paid: String(formData.get("price_paid")).replace(/[$,]/g, ""),
       start_date: formData.get("start_date"),
       end_date: formData.get("end_date"),
-      sale_type: formData.get("sale_type"),
+      yoga_class_type: formData.get("yoga_class_type"),
       sale_date_time: new Date(),
       payment_method: formData.get("payment_method"),
       number_of_classes: formData.get("number_of_classes"),
@@ -366,9 +366,9 @@ function CreateSale(action, id) {
             <div className="col-2 pr-3">
               <input
                 type="text"
-                name="sale_type"
-                id="sale_type"
-                value={formData.sale_type}
+                name="yoga_class_type"
+                id="yoga_class_type"
+                value={formData.yoga_class_type}
                 readOnly
                 className="formInput"
               />
@@ -469,7 +469,7 @@ function UpdateDeleteSale(action) {
     const sale = {
       package_id: formData.get("package_id"),
       customer_id: formData.get("customer_id"),
-      sale_type: formData.get("sale_type"),
+      yoga_class_type: formData.get("yoga_class_type"),
       number_of_classes: formData.get("number_of_classes"),
       price_paid: String(formData.get("price_paid")).replace(/[$,]/g, ""),
       payment_method: formData.get("payment_method"),
@@ -745,9 +745,9 @@ function UpdateDeleteSale(action) {
                 <div className="col-2 pr-3">
                   <input
                     type="text"
-                    name="sale_type"
-                    id="sale_type"
-                    defaultValue={sale.sale_type}
+                    name="yoga_class_type"
+                    id="yoga_class_type"
+                    defaultValue={sale.yoga_class_type}
                     readOnly
                     className="formInput"
                   />
