@@ -7,6 +7,7 @@ const Customer = require("../models/Customer");
 
 console.log("CLASS ATTENDANCE ROUTES LOADED");
 /*pulls the class info for the select box and automates */
+/*  Removed due to unique customer issue.  
 router.get("/", async (req, res) => {
     try {
         const attendance = await ClassAttendance.find()
@@ -34,6 +35,40 @@ router.get("/", async (req, res) => {
         });
     }
 });
+*/
+
+
+router.get("/", async (req, res) => {
+    try {
+        const attendance = await ClassAttendance.find()
+            .sort({ yoga_class_date: 1, start_time: 1 })
+            .select(
+                "yoga_class_id yoga_class_date start_time instructor_id instructor_name customers"
+            )
+            .lean();
+
+        const report = attendance.map((item) => ({
+            yoga_class_id: item.yoga_class_id,
+            yoga_class_date: item.yoga_class_date,
+            start_time: item.start_time,
+            instructor_id: item.instructor_id,
+            instructor_name: item.instructor_name,
+            number_of_students: item.customers.length,
+            customers: item.customers.map((customer) => ({
+            customer_id: customer.customer_id
+            }))
+        }));
+
+        res.status(200).json(report);
+    } catch (error) {
+        console.error("Error retrieving attendance report:", error);
+
+        res.status(500).json({
+            message: "Unable to retrieve attendance report."
+        });
+    }
+});
+
 
 //add the attendance list to the permenant record
 /*

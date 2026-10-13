@@ -14,13 +14,14 @@ const dashboardMainRoutes = require("./src/routes/dashboard_main");
 const dashboardInstructorRoutes = require("./src/routes/dashboard_instructor");
 const dashboardManagerRoutes = require("./src/routes/dashboard_manager");
 const classAttendanceRoutes = require("./src/routes/class_attendance");
+const instructorPayRoutes = require("./src/routes/instructor_pay");
 
 const loginRoutes = require("./src/routes/login");
 const BLogic = require("./src/library/BLogic");
 const Dbg = require("./src/library/Dbg");
 
 const path = require("path");
-const START_FRONTEND = false;           //set prior to deployment
+const START_FRONTEND = true;           //set prior to deployment
 
 path.join(__dirname, "../client/dist");
 
@@ -30,6 +31,22 @@ const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+
+/**
+ * Middle ware alert!  Since we don't have access to scheduled 
+ * tasks, run this update on every access.  
+ */
+app.use("/api", async (req, res, next) => {
+    try {
+        await BLogic.checkExpiredCustomers();
+        next();
+    } catch (error) {
+        console.error("Error checking expired customers:", error);
+        next(error);
+    }
+});
+
 app.use("/api/users", userRoutes);
 app.use("/api/customers", customerRoutes);
 app.use("/api/yoga_classes", yoga_classRoutes);
@@ -40,7 +57,7 @@ app.use("/api/dashboard-main", dashboardMainRoutes);
 app.use("/api/dashboard-instructor", dashboardInstructorRoutes);
 app.use("/api/dashboard-manager", dashboardManagerRoutes);
 app.use("/api/attendance", classAttendanceRoutes);
-
+app.use("/api/reports/instructor-pay", instructorPayRoutes);
 
 
 

@@ -6,41 +6,9 @@ const BLogic = require("../library/BLogic");
 
 console.log("USER ROUTES LOADED");
 
-// Generate a 5-character user ID based on role
-async function generateUserId(role) {
-  let prefix;
-
-  switch (role) {
-    case "Manager":
-      prefix = "M";
-      break;
-
-    case "Instructor":
-      prefix = "I";
-      break;
-
-    default:
-      throw new Error(
-        "Invalid role. Must be Manager or Instructor."
-      );
-  }
-
-  // Count only users with this role
-  const userCount = await User.countDocuments({
-    role: role
-  });
-
-  // Next number for this role
-  const nextNumber = userCount + 1;
-
-  // Convert to 4 digits
-  const numberPart = String(nextNumber).padStart(4, "0");
-
-  // Return 5-character ID
-  return prefix + numberPart;
-}
-
-
+/**
+ * 
+ */
 router.get("/", async (req, res) => {
     try {
         console.log("Finding users....");
@@ -69,7 +37,9 @@ router.get("/instructors", async (req, res) => {
   }
 });
 
-// GET all managers
+/**
+ * GET all managers
+ */
 router.get("/managers", async (req, res) => {
   try {
      //remove the password and -mustChangePassword field
@@ -84,7 +54,9 @@ router.get("/managers", async (req, res) => {
   }
 });
 
-
+/**
+ * 
+ */
 router.get("/:id", async (req, res) => {
     try {
         const user = await User.findOne({
@@ -130,7 +102,7 @@ router.post("/", async (req, res) => {
         const { role } = req.body;
 
         // Generate the user_id based on the user's role
-        const user_id = await generateUserId(role);
+        const user_id = await BLogic.generateUserId(role);
 
         // Create the user with the generated ID
         const user = new User({

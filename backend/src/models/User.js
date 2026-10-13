@@ -5,11 +5,11 @@ const userSchema = new mongoose.Schema(
     user_id: {
       type: String,
       required: true,
-      unique:true
+      unique: true
     },
-    role:{
-      type:String,
-      required:true 
+    role: {
+      type: String,
+      required: true
     },
     fname: {
       type: String,
@@ -40,7 +40,7 @@ const userSchema = new mongoose.Schema(
       required: true
     },
     communication_preference: {
-      type: String, 
+      type: String,
       required: true
     },
     email: {
@@ -52,9 +52,14 @@ const userSchema = new mongoose.Schema(
       required: false
     },
     mustChangePassword: {
-    type: Boolean,
-    default: true
-  }    
-});
+      type: Boolean,
+      default: true
+    },
+    payrate: {
+      type: mongoose.Schema.Types.Decimal128,
+      default: 10.00,
+    }
+
+  });
 
 module.exports = mongoose.model("User", userSchema, "user");

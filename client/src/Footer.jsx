@@ -22,7 +22,9 @@ function Footer() {
                         </div>
                     </div>
                     <div className="col-4">
-                        <img src={coyoteLogo} className="logo rounded" alt="Missing" title="Trust the Coyote to use the finest ACME products!" />
+                        <a href={"/AboutMe"} >
+                        <img src={coyoteLogo} className="coyotelogo rounded" alt="Missing" title="Trust the Coyote to use the finest ACME products!" />
+                        </a>
                     </div>
                 </div>
             </footer>

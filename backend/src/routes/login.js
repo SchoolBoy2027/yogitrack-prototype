@@ -21,7 +21,7 @@ router.post("/", async (req, res) => {
         // Check required fields
 
         if (!user_id || !password) {
-            console.log("Soemthing blank.", "User ID and password are required.");
+            console.log("Something blank.", "User ID and password are required.");
             return res.status(400).json({
                 message: "User ID and password are required."
             });
@@ -49,11 +49,8 @@ router.post("/", async (req, res) => {
 
         // Compare supplied password + pepper with bcrypt hash
 
-        const passwordWithPepper =
-            password + process.env.PASSWORD_PEPPER;
-
-        const passwordMatch = await bcrypt.compare(
-            passwordWithPepper,
+       const passwordMatch = await bcrypt.compare(
+            password + process.env.PASSWORD_PEPPER,
             user.password
         );
 
@@ -105,21 +102,12 @@ router.post("/change-password", async (req, res) => {
 
     try {
 
-        const {
-            user_id,
-            currentPassword,
-            newPassword
-        } = req.body;
+        const {user_id,currentPassword, newPassword} = req.body;
 
 
         // Check required fields
 
-        if (
-            !user_id ||
-            !currentPassword ||
-            !newPassword
-        ) {
-
+        if (!user_id || !currentPassword || !newPassword ) {
             return res.status(400).json({
                 message: "All password fields are required."
             });
@@ -129,39 +117,28 @@ router.post("/change-password", async (req, res) => {
         // Password length
 
         if (newPassword.length < 8) {
-
-            return res.status(400).json({
-                message: "New password must be at least 8 characters."
-            });
+            return res.status(400).json({ message: "New password must be at least 8 characters."});
         }
 
 
         // Find user
 
-        const user = await User.findOne({
-            user_id: user_id
-        });
+        const user = await User.findOne({user_id: user_id});
 
 
         if (!user) {
-
             return res.status(404).json({
                 message: "User not found."
             });
         }
 
 
-        // Verify current password
-        console.log("current password=" + currentPassword);
-        console.log("user password=" + user.password);
-
         const passwordMatch = await bcrypt.compare(
-            currentPassword,
+            currentPassword + process.env.PASSWORD_PEPPER,
             user.password
         );
 
         if (!passwordMatch) {
-
             return res.status(401).json({
                 message: "Current password is incorrect."
             });
@@ -171,26 +148,18 @@ router.post("/change-password", async (req, res) => {
         // Make sure new password is different
 
         const samePassword = await bcrypt.compare(
-            newPassword,
+            newPassword + process.env.PASSWORD_PEPPER,
             user.password
         );
 
 
         if (samePassword) {
-
-            return res.status(400).json({
-                message:
-                    "New password must be different from the current password."
-            });
+            return res.status(400).json({message:"New password must be different from the current password."});
         }
 
-        const passwordWithPepper =
-            newPassword + process.env.PASSWORD_PEPPER;
+        const passwordWithPepper =  newPassword + process.env.PASSWORD_PEPPER;
 
-        const hashedPassword = await bcrypt.hash(
-            passwordWithPepper,
-            12
-        );
+        const hashedPassword = await bcrypt.hash(passwordWithPepper, 12 );
 
 
         // Update user

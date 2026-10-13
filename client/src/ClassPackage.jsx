@@ -116,51 +116,15 @@ function ViewClassPackage() {
 function CreateClassPackage(action, id) {
 
   const [formData, setFormData] = useState({
-    customer_id: "",
-    package_id: "",
-    class_package_type: "",
-    number_of_classes: "",
-    price_paid: "",
-    payment_method: "",
-    days: "",
-    start_date: "",
-    end_date: "",
-    is_active: true
+      class_package_id: "None",
+      cost:"",
+      package_category: "",
+      yoga_class_type: "",
+      number_of_classes: "",
+      days: "",
+      is_active: true
 
   });
-
-  const handlePackageChange = async (packageId) => {
-    FormHelp.LogIt2("Selected ID:", packageId);
-
-    setFormData((prev) => ({
-      ...prev,
-      package: packageId
-    }));
-
-    if (packageId) {
-      const response = await fetch("/api/class_packages");
-      const packages = await response.json();
-
-      const selectedPackage = packages.find(
-        (pkg) => pkg.class_package_id === packageId
-      );
-
-      FormHelp.LogIt2("Selected package:", selectedPackage);
-
-      if (selectedPackage) {
-
-        setFormData((prev) => ({
-          ...prev,
-          package: packageId,
-          number_of_classes: selectedPackage.number_of_classes,
-          price_paid: selectedPackage.cost.$numberDecimal,
-          days: selectedPackage.days,
-          class_package_type: selectedPackage.class_type
-        }));
-      }
-    }
-  };
-
 
   const submitClassPackage = async () => {
 
@@ -169,17 +133,12 @@ function CreateClassPackage(action, id) {
     const formData = new FormData(form);
 
     const class_package = {
-      class_package_id: '0',
-      package_id: formData.get("package_id"),
-      customer_id: formData.get("customer_id"),
-      price_paid: String(formData.get("price_paid")).replace(/[$,]/g, ""),
-      start_date: formData.get("start_date"),
-      end_date: formData.get("end_date"),
-      class_package_type: formData.get("class_package_type"),
-      class_package_date_time: new Date(),
-      payment_method: formData.get("payment_method"),
+      class_package_id: "None",
+      cost: String(formData.get("cost")).replace(/[$,]/g, ""),
+      package_category: formData.get("package_category"),
+      yoga_class_type: formData.get("yoga_class_type"),
       number_of_classes: formData.get("number_of_classes"),
-      days_valid: formData.get("days"),
+      days: formData.get("days"),
       is_active: true
     };
 
@@ -227,7 +186,7 @@ function CreateClassPackage(action, id) {
 
             <div className="col-10">
               <p className="p-3 fs-3 fw-bold text-white">
-                Create ClassPackage
+                Create Class Package
               </p>
             </div>
 
@@ -249,8 +208,7 @@ function CreateClassPackage(action, id) {
             <div className="col-2">
               <label
                 htmlFor="package_category_id"
-                className="formLabel fs-5 fw-bold"
-              >
+                className="formLabel fs-5 fw-bold">
                 Package Type:
               </label>
             </div>
@@ -258,8 +216,8 @@ function CreateClassPackage(action, id) {
             <div className="col-2">
 
               <select
-                id="package_category_id"
-                name="package_category_id"
+                id="package_category"
+                name="package_category"
                 className="formInput"
               >
                 <option value="General">
@@ -272,9 +230,9 @@ function CreateClassPackage(action, id) {
               </select>
 
             </div>
-            <div className="col-2">
+            <div className="col-3">
               <label className="formLabel fs-5 fw-bold">
-                Package Cost:
+                Package Cost: $
               </label>
             </div>
 
@@ -283,11 +241,11 @@ function CreateClassPackage(action, id) {
                 type="number"
                 name="cost"
                 id="cost"
-                defaultValue={FormHelp.ToCurrency("20")}
+                defaultValue={"20.00"}
                 className="formInput"
-                inputMode="decimal"
+                
                 placeholder="$0.00"
-                step="10"
+                step="10.00"
               />
             </div>
           </div>
@@ -322,7 +280,6 @@ function CreateClassPackage(action, id) {
                 type="number"
                 name="days"
                 id="days"
-
                 className="formInput"
               />
             </div>
@@ -330,15 +287,15 @@ function CreateClassPackage(action, id) {
 
             <div className="col-2">
               <label className="formLabel fs-5 fw-bold">
-                ClassPackage Type:
+                Yoga Class Type:
               </label>
             </div>
 
             <div className="col-2 pr-3">
               <input
                 type="text"
-                name="class_type"
-                id="class_type"
+                name="yoga_class_type"
+                id="yoga_class_type"
 
                 className="formInput"
               />
@@ -392,15 +349,12 @@ function UpdateDeleteClassPackage(action) {
     const formData = new FormData(form);
 
     const class_package = {
-      package_id: formData.get("package_id"),
-      customer_id: formData.get("customer_id"),
-      class_package_type: formData.get("class_package_type"),
+      class_package_id: formData.get("class_package_id"),
+      cost: String(formData.get("cost")).replace(/[$,]/g, ""),
+      package_category: formData.get("package_category"),
+      yoga_class_type: formData.get("yoga_class_type"),
       number_of_classes: formData.get("number_of_classes"),
-      price_paid: String(formData.get("price_paid")).replace(/[$,]/g, ""),
-      payment_method: formData.get("payment_method"),
-      start_date: formData.get("start_date"),
-      end_date: formData.get("end_date"),
-      days_valid: formData.get("days"),
+      days: formData.get("days"),
       is_active: true
     };
 
@@ -637,9 +591,9 @@ function UpdateDeleteClassPackage(action) {
                 <div className="col-2 pr-3">
                   <input
                     type="text"
-                    name="class_type"
-                    id="class_type"
-                    defaultValue={class_package.class_type}
+                    name="yoga_class_type"
+                    id="yoga_class_type"
+                    defaultValue={class_package.yoga_class_type}
                     className="formInput"
                   />
                 </div>

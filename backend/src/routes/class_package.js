@@ -6,17 +6,10 @@ const BLogic = require("../library/BLogic");
 console.log("CLASS_PACKAGE ROUTES LOADED");
 
 
-/**  you won't stay here.  
+
+/**
+ * 
  */
-function buildClassPackageId(package_category, yoga_class_type, number_of_classes) {
-    const category = package_category.charAt(0).toUpperCase();
-    const type = yoga_class_type.charAt(0).toUpperCase();
-    const classes = number_of_classes === 1000 ? "U" : number_of_classes;
-
-    return `${category}${type}${classes}`;
-}
-
-
 router.get("/", async (req, res) => {
     try {
         console.log("Finding class_packages....");
@@ -39,7 +32,9 @@ router.get("/", async (req, res) => {
     }
 });
 
-
+/**
+ * 
+ */
 router.get("/:id", async (req, res) => {
     try {
         const class_package = await Class_Package.findOne({
@@ -87,7 +82,13 @@ router.post("/", async (req, res) => {
       number_of_classes
     } = req.body;
 
-    const class_package_id = await buildClassPackageId(
+
+    console.log("Request body:", req.body);
+console.log("package_category:", package_category);
+console.log("yoga_class_type:", yoga_class_type);
+console.log("number_of_classes:", number_of_classes);
+
+    const class_package_id = await BLogic.buildClassPackageId(
       package_category,
       yoga_class_type,
       number_of_classes

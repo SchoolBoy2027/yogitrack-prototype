@@ -156,7 +156,7 @@ function CreateSale(action, id) {
           number_of_classes: selectedPackage.number_of_classes,
           price_paid: selectedPackage.cost,  //mod for NaN
           days: selectedPackage.days,
-          yoga_class_type: selectedPackage.class_type
+          yoga_class_type: selectedPackage.yoga_class_type
         }));
       }
     }

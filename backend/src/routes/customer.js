@@ -5,26 +5,6 @@ const BLogic = require("../library/BLogic");
 
 console.log("CUSTOMER ROUTES LOADED");
 
-
-// Generate a 5-character customer ID 
-async function generateCustomerId() {
-  const prefix = "C";
-
-  // Count only users with this role
-  const customerCount = await Customer.countDocuments();
-
-  // Next number for this role
-  const nextNumber = customerCount + 1;
-
-  // Convert to 4 digits
-  const numberPart = String(nextNumber).padStart(4, "0");
-
-  // Return 5-character ID
-  return prefix + numberPart;
-}
-
-
-
 router.get("/", async (req, res) => {
   try {
     console.log("Finding customers....");
@@ -65,7 +45,7 @@ router.get("/:id", async (req, res) => {
 router.post("/", async (req, res) => {
   try {
 
-    const customer_id = await generateCustomerId();
+    const customer_id = await BLogic.generateCustomerId();
 
     // Create the user with the generated ID
     const customer = new Customer({

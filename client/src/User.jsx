@@ -92,7 +92,7 @@ function CreateUser(action, id) {
     const formData = new FormData(form);
 
     const user = {
-      user_id: formData.get("user_id"),
+      user_id: 9999,
       role: formData.get("role"),
       fname: formData.get("fName"),
       lname: formData.get("lName"),
@@ -105,7 +105,7 @@ function CreateUser(action, id) {
       communication_preference: formData.get("communication")
     };
 
-      if (await DBF.duplicateCustomerCheck(customer.fname, customer.lname)) 
+      if (await DBF.duplicateCustomerCheck(user.fname, user.lname)) 
       {
         FormHelp.LogIt2("Sending user:", user);
         try {
@@ -151,12 +151,6 @@ function CreateUser(action, id) {
             </div>
           </div>
           <div className="row pb-1 border-bottom border-dark border-solid">
-            <div className="col-3">
-              <label htmlFor="id" className="formLabel fs-5 fw-bold">User ID:</label>
-            </div>
-            <div className="col-3">
-              <input type="text" name="user_id" className="formInput" />
-            </div>
             <div className="col-2">
               <label htmlFor="role" className="formLabel fs-5 fw-bold">Role:</label>
             </div>
@@ -169,17 +163,17 @@ function CreateUser(action, id) {
           </div>
 
           <div className="row pb-1 border-bottom border-dark border-solid">
-            <div className="col-2 ">
-              <label htmlFor="lName" className="formLabel fs-6 fw-bold">Last Name:</label>
-            </div>
-            <div className="col-4">
-              <input type="text" name="lName" className="formInput" />
-            </div>
             <div className="col-2">
-              <label htmlFor="fName" className="formLabel fs-6 fw-bold">First Name:</label>
+              <label htmlFor="fName" className="formLabel fs-5 fw-bold">First Name:</label>
             </div>
             <div className="col-4">
               <input type="text" name="fName" className="formInput" />
+            </div>
+            <div className="col-2 ">
+              <label htmlFor="lName" className="formLabel fs-5 fw-bold">Last Name:</label>
+            </div>
+            <div className="col-4">
+              <input type="text" name="lName" className="formInput" />
             </div>
           </div>
 

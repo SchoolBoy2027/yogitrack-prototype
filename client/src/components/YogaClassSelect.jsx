@@ -20,7 +20,13 @@ function YogaClassSelect({ value, onChange }) {
                 await FormHelp.ErrCheckThrow(response, "YogaClassSelect");
 
                 const data = await response.json();
-                const today = new Date().toISOString().slice(0, 10);
+                const now = new Date();
+
+                const today = [
+                    now.getFullYear(),
+                    String(now.getMonth() + 1).padStart(2, "0"),
+                    String(now.getDate()).padStart(2, "0")
+                ].join("-");
 
                 const todaysYogaClasses = data.filter((item) => {
                     if (!item.yoga_class_date) return false;

@@ -13,10 +13,13 @@ import ClassPackage from "./ClassPackage.jsx";
 import ClassSchedule from "./ClassSchedule";
 import AttendanceList from "./AttendanceList.jsx";
 import AttendanceReport from "./AttendanceReport.jsx";
-
+import InstructorEval from "./InstructorEval.jsx";
+import InstructorPayReport from "./InstructorPayReport.jsx";
+import AboutMe from "./AboutMe.jsx";
 import Login from "./Login.jsx";
 import Footer from "./Footer.jsx";
 import Header from "./Header.jsx";
+import WorkInProgress from "./components/WorkInProgress.jsx";
 
 import IsLoggedIn from "./IsLoggedIn.jsx";      //security wrapper for the site below.
 
@@ -47,12 +50,17 @@ function Layout() {
               <Route path="/ClassPackage/:action" element={<ClassPackage />} />
               <Route path="/ClassPackage/:action/:id" element={<ClassPackage />} />
               <Route path="/ClassSchedule/View" element={<ClassSchedule />} />
+
               <Route path="/InstructorReport/View" element={<InstructorReport />} />
               <Route path="/InstructorReport/AttendanceReport" element={<AttendanceReport />} />
               <Route path="/InstructorReport/Attendance" element={<AttendanceList />} />
+              <Route path="InstructorReport/Eval" element= {<WorkInProgress/>}/>
               <Route path="/Report/View" element={<ManagerReport />} />
-
+              <Route path="/Report/AttendanceReport" element={<AttendanceReport />} />
+              <Route path="/Report/InstructorEval" element={<InstructorEval />} />
+              <Route path="/Report/InstructorPay" element={<InstructorPayReport />} />
               <Route path="/Dashboard" element={<App />} />
+              <Route path="/AboutMe" element={<AboutMe />} />
             </Route>
             <Route path="*" element={<Login />} />  /* The catch all, login redirects to the dashboard */
           </Routes>

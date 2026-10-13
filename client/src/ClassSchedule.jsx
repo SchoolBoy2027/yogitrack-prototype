@@ -127,29 +127,25 @@ export default function ClassSchedule() {
             <div className="col-2">Class Schedule</div>
             <div className="col-5"></div>
         </div>
-          <div className="row fs-3 text-white fw-bold ">
-            
-          <div className="col-4 ">
+        <div className="row fs-3 text-white fw-bold ">
+          <div className="col-2">
+            <button
+              type="button"
+              className="btn btn-dark fw-bold border-white dt-center "
+              onClick={() =>
+                setWeekOffset((value) => value - 1)
+              }
+            >
+              Previous Week
+            </button>
+         </div>   
+          <div className="col-9 ">
             {monthLabel === endMonthLabel
               ? monthLabel
               : `${monthLabel} – ${endMonthLabel}`}
-          </div>
-         <div className="col-4 "></div>
-        <div className="col-2">
           <button
             type="button"
-            className="btn btn-dark fw-bold border-white dt-center"
-            onClick={() =>
-              setWeekOffset((value) => value - 1)
-            }
-          >
-            Previous Week
-          </button>
-        </div>
-        <div className="col-1 dt-center">
-          <button
-            type="button"
-            className="btn btn-dark fw-bold border-white dt-center"
+            className="btn btn-dark fw-bold border-white dt-center ms-3"
             onClick={() => setWeekOffset(0)}
             disabled={weekOffset === 0}
           >
@@ -157,7 +153,6 @@ export default function ClassSchedule() {
           </button>
         </div>
         <div className="col-1 ">
-        
           <button
             type="button"
             className="btn btn-dark fw-bold border-white dt-center"

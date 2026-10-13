@@ -107,18 +107,13 @@ function ViewCustomer2() {
                         View Customers
                     </div>
                 </div>
-            <div className="container-fluid mt-5">
+            <div className="container-fluid ">
                 <div className="row">
-                  
                 <div className={selectedCustomer ? "col-8" : "col-12"} 
                         style={{
                             minWidth: 0,
                             overflowX: selectedCustomer ? "auto" : "hidden",
-                            overflowY: selectedCustomer ? "auto" : "hidden",
-                        }}
-                
-                
-                >
+                        }}>
                         <DDTable
                             data={customers}
                             actionPath={(row) => `/Customer/Edit/${row.customer_id}`}

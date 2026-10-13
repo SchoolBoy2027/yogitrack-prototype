@@ -46,6 +46,7 @@ router.get("/:id", async (req, res) => {
 
 
 // Generate a 5-character user ID based on role
+/*
 async function generateClassId() {
     const year = new Date().getFullYear();
 
@@ -59,12 +60,21 @@ async function generateClassId() {
     const yoga_class_id = year * 1000000 + count + 1;
     return await yoga_class_id;
 }
-
+*/
 router.post("/", async (req, res) => {
     try {
         const yoga_class = new Yoga_Class(req.body);
 
-        const yoga_class_id = await generateClassId();
+
+        const overlappingClass = await BLogic.checkYogaClassOverlap(yoga_class);
+
+        if (overlappingClass) {
+            return res.status(409).json({
+                message: "This instructor already has a yoga class scheduled during this time."
+            });
+        }
+
+        const yoga_class_id = await BLogic.generateClassId();
              yoga_class.yoga_class_id = yoga_class_id;
         const savedYoga_Class = await yoga_class.save();
 
@@ -77,7 +87,7 @@ router.post("/", async (req, res) => {
         });
     }
 });
-
+/*
 router.put("/:yoga_class_id", async (req, res) => {
     try {
         console.log("Updating yoga_class:", req.params.yoga_class_id);
@@ -108,6 +118,68 @@ router.put("/:yoga_class_id", async (req, res) => {
         });
     }
 });
+*/
+
+router.put("/:yoga_class_id", async (req, res) => {
+    try {
+        console.log("Updating yoga_class:", req.params.yoga_class_id);
+        console.log("New data:", req.body);
+
+        const existingClass = await Yoga_Class.findOne({
+            yoga_class_id: req.params.yoga_class_id
+        });
+
+        if (!existingClass) {
+            return res.status(404).json({
+                message: "Yoga_Class not found"
+            });
+        }
+
+        const updatedData = {
+            ...existingClass.toObject(),
+            ...req.body
+        };
+
+        console.log("Date received:", req.body.yoga_class_date);
+        console.log("Start time received:", req.body.start_time);
+        console.log("End time received:", req.body.end_time);
+
+
+        const overlappingClass = await BLogic.checkYogaClassOverlap(
+            updatedData,
+            req.params.yoga_class_id
+        );
+
+        if (overlappingClass) {
+            console.log("Class Update rejected, This instructor already has a class scheduled during this time.")
+            return res.status(409).json({
+                message: "This instructor already has a class scheduled during this time."
+            });
+        }
+
+        const updatedYoga_Class = await Yoga_Class.findOneAndUpdate(
+            { yoga_class_id: req.params.yoga_class_id },
+            req.body,
+            {
+                new: true,
+                runValidators: true
+            }
+        );
+
+        res.json(updatedYoga_Class);
+
+        console.log("Saved yoga class:", updatedYoga_Class);
+
+    } catch (error) {
+        console.error("Error updating yoga_class:", error);
+
+        res.status(500).json({
+            message: error.message
+        });
+    }
+});
+
+
 router.delete("/:yoga_class_id", async (req, res) => {
     try {
         const deletedYoga_Class = await Yoga_Class.findOneAndDelete({

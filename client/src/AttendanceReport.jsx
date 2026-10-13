@@ -53,7 +53,8 @@ function AttendanceReport() {
                     <div className=" fs-5 text-white fw-bold">Class Attendance Report</div>
 
                     <DDTable
-                        data={classes}
+                       // data={classes}
+                        data={classes.map(({ customers, ...classData }) => classData)}
                         clickableColumns={["yoga_class_id"]}
                         onCellClick={handleClassClick}
                     />

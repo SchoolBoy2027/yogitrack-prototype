@@ -68,7 +68,7 @@ function PackageSelect({ value, onChange }) {
 
                         const packageTitle =
                             `${class_package.package_category} - ` +
-                            `${class_package.class_type} - ` +
+                            `${class_package.yoga_class_type} - ` +
                             `${class_package.number_of_classes === 1000
                                 ? "Unlimited"
                                 : class_package.number_of_classes + " classes"}`;

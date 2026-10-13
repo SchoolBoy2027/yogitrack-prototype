@@ -56,6 +56,8 @@ function CreateAttendanceList() {
                     balance: customer.balance
                 }))
             };
+            console.log("Submitting class ID:", selectedClass.yoga_class_id);
+            console.log("Submitting attendance:", JSON.stringify(attendanceData, null, 2));
 
             const response = await fetch("/api/attendance", {
                 method: "PUT",
@@ -65,7 +67,12 @@ function CreateAttendanceList() {
                 body: JSON.stringify(attendanceData)
             });
 
-            await FormHelp.ErrCheckThrow(response, "submitAttendanceList");
+            if (!response.ok) {
+                const errorData = await response.json();
+                console.error("Attendance server error:", errorData);
+                throw new Error(errorData.message || "Unable to submit attendance.");
+            }
+ //           await FormHelp.ErrCheckThrow(response, "submitAttendanceList");
 
             const data = await response.json();
 
@@ -80,6 +87,7 @@ function CreateAttendanceList() {
     const handleChange = (selectedClass) => {
         console.log("selectedClass=", selectedClass);
         setSelectedClass(selectedClass || null);
+        setSelectedCustomers([]);
         setFormData((prev) => ({
             ...prev,
             yoga_class_id: selectedClass?.yoga_class_id || "",
