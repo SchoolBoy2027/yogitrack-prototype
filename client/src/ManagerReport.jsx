@@ -1,4 +1,4 @@
-import CardDeck from "./components/CardDeck";
+import CardDeck from "./components/CardDeck.jsx";
 
 function ManagerReport() {
   return (

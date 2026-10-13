@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import instructorReportsLogo from '../assets/instructorLogin.png'
 import reportsLogo from '../assets/Reports.png'
 import salesLogo from '../assets/sales.png'
-import instructorLogo from '../assets/instructor.png'
+import instructorLogo from '../assets/Instructor.png'
 import customerLogo from '../assets/senior.png'
 import classLogo from '../assets/senior2.png'
 import packageLogo from '../assets/wellness.png'
