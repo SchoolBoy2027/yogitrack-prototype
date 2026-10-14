@@ -84,29 +84,31 @@ function CardDeck({ api, title }) {
     if (error) {
         return <p className="text-danger">{error}</p>;
     }
-
+    let style='width:10%';
     return (
         <>
             
-        <div className="row p-5 m-5 ">
-
+        <div className="d-flex flex-column flex-md-row ms-0 pt-5">
+      
                 {cards.map((card) => (
-                    <div className="card col-2 mt-0 pt-0 ms-5">
-                    
-                            <a href={card.path} title={card.title} >
-                            <div className="row">    
-                                <img src={images[card.image?.split("/").pop()]} className="card-img-top" alt={card.title} />
-                           </div>
-                                <div className=" row pl-1 pr-1 mb-0">
-                                    <div className="btn btn-dark fw-bold dash-button">
-                                        {card.title}
-                                    </div>
-                                </div>
-                            </a>
-                        
-                        </div>
-                ))}
+                    <div className="p-2 justify-content-start mt-0 pt-0 ms-5 card">
+                        <a href={card.path} title={card.title} className="position-relative d-inline-block" style={{ style }}>
+                            <img
+                                src={images[card.image?.split("/").pop()]}
+                                className="card-img-top"
+                                alt={card.title}
+                                style={{ style }}
+                            />
 
+                            <div className="position-absolute bottom-0 start-0 w-100 p-0">
+                                <div className="btn btn-dark border-2 border-secondary fw-bold dash-button w-100 rounded-0">
+                                    {card.title}
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+               ))}
+      
             {cards.length === 0 && (
                 <p className="text-white text-center">
                     Please wait....

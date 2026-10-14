@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import loginLogo from "./assets/PadlockFancy.png";
 import { useAuth } from "./AuthContext";
+import scheduleImage from "./assets/logo2.png";
 
 function Login2() {
   const navigate = useNavigate();
@@ -41,7 +42,6 @@ function Login2() {
           setResponseMessage(data.message || "Invalid user ID or password.");
           return;   
       }
-  //    data.user = "M0001";      //remove when fixed
       login(data.user);
       setLoggedInUser(data.user);
 
@@ -113,9 +113,14 @@ function Login2() {
       setResponseMessage("Unable to connect to the server.");
     }
   };
+  const schedulePath = "/ClassSchedule/View";
+const scheduleTitle = "Class Schedule";
+
 
   if (mustChangePassword) {
     return (
+      <>
+      <div className="d-flex justify-content-center">
       <div className="loginForm pb-1 rounded m-5 p-1">
         <div id="response" className="ajaxReturnMsg">{responseMessage}</div>
         <form id="changePassword" className="classForm" onSubmit={handleChangePassword}>
@@ -167,10 +172,14 @@ function Login2() {
 
         </form>
       </div>
+      </div>
+      </>
     );
   }
 
   return (
+    <>
+    <div className="d-flex justify-content-center">
     <div className="loginForm pb-1 rounded m-5 p-1">
       <div id="response" className="ajaxReturnMsg">{responseMessage}</div>
       <form id="login" className="classForm" onSubmit={handleLogin}>
@@ -216,6 +225,29 @@ function Login2() {
 
       </form>
     </div>
+    </div>
+        <div className="d-flex flex-column flex-md-row ms-0 pt-5">
+      
+        <div className="p-2 justify-content-start mt-0 pt-0 ms-5 card">
+            <a href={schedulePath} title={scheduleTitle} className="position-relative d-inline-block" style={{ width: "200px" }}>
+                <img
+                    src={scheduleImage}
+                    className="card-img-top"
+                    alt={scheduleTitle}
+                    style={{ width: "200px" }}
+                />
+
+                <div className="position-absolute bottom-0 start-0 w-100 p-0">
+                    <div className="btn btn-dark border-2 border-secondary fw-bold dash-button w-100 rounded-0">
+                        {scheduleTitle}
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        </div>
+
+    </>
   );
 }
 

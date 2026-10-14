@@ -49,7 +49,7 @@ function Layout() {
               <Route path="/Sale/:action/:id" element={<Sale />} />
               <Route path="/ClassPackage/:action" element={<ClassPackage />} />
               <Route path="/ClassPackage/:action/:id" element={<ClassPackage />} />
-              <Route path="/ClassSchedule/View" element={<ClassSchedule />} />
+
 
               <Route path="/InstructorReport/View" element={<InstructorReport />} />
               <Route path="/InstructorReport/AttendanceReport" element={<AttendanceReport />} />
@@ -62,6 +62,7 @@ function Layout() {
               <Route path="/Dashboard" element={<App />} />
               <Route path="/AboutMe" element={<AboutMe />} />
             </Route>
+            <Route path="/ClassSchedule/View" element={<ClassSchedule />} />
             <Route path="*" element={<Login />} />  /* The catch all, login redirects to the dashboard */
           </Routes>
         </div>

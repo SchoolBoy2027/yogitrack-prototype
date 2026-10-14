@@ -182,7 +182,7 @@ class BLogic {
      * @returns 
      */
     static async sendAttendanceNotification(customer, attendance) {
-        const firstName = customer.fname;
+        const fName = customer.fname;
         const classDate = new Date(attendance.start_time);
 
         const date = classDate.toLocaleDateString("en-GB", {
@@ -197,7 +197,7 @@ class BLogic {
                                                     hour12: true
                                                 });
 
-        const message = `Hello ${firstName}! You are checked-in for a class on ${date} at ${time}. Your class-balance is ${customer.balance}.`;
+        const message = `Hello ${fName}! You are checked-in for a class on ${date} at ${time}. Your class-balance is ${customer.balance}.`;
 
         if (process.env.NOTIFICATION_MODE === "simulation") {
             console.log(`Attendance notification for ${customer.customer_id}: ${message}`);
