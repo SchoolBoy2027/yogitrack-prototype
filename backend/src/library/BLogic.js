@@ -52,7 +52,6 @@ class BLogic {
     }
 
 
-
     /**
      * generateCustomerId() generates a new customer_id
      * CXXXX
@@ -61,59 +60,58 @@ class BLogic {
     static async generateCustomerId() {
         const prefix = "C";
 
-        // Count only users with this role
-        const customerCount = await Customer.countDocuments();
+        const lastCustomer = await Customer.findOne()
+            .sort({ customer_id: -1 });
 
-        // Next number for this role
-        const nextNumber = customerCount + 1;
+        let nextNumber = 1;
 
-        // Convert to 4 digits
-        const numberPart = String(nextNumber).padStart(4, "0");
-
-        // Return 5-character ID
-        return prefix + numberPart;
+        if (lastCustomer) {
+            nextNumber = Number(lastCustomer.customer_id.substring(1)) + 1;
         }
 
+        const numberPart = String(nextNumber).padStart(4, "0");
+
+        return prefix + numberPart;
+    }
 
     /**
      * generateUserId(role)
      * @param {*} role Manager or Instructor, Instructors teach classes
      * MXXXX or IXXXX
      * @returns String
-     */    
+     */
     static async generateUserId(role) {
         let prefix;
 
         switch (role) {
             case "Manager":
-            prefix = "M";
-            break;
+                prefix = "M";
+                break;
 
             case "Instructor":
-            prefix = "I";
-            break;
+                prefix = "I";
+                break;
 
             default:
-            throw new Error(
-                "Invalid role. Must be Manager or Instructor."
-            );
+                throw new Error(
+                    "Invalid role. Must be Manager or Instructor."
+                );
         }
 
-        // Count only users with this role
-        const userCount = await User.countDocuments({
+        const lastUser = await User.findOne({
             role: role
-        });
+        }).sort({ user_id: -1 });
 
-        // Next number for this role
-        const nextNumber = userCount + 1;
+        let nextNumber = 1;
 
-        // Convert to 4 digits
+        if (lastUser) {
+            nextNumber = Number(lastUser.user_id.substring(1)) + 1;
+        }
+
         const numberPart = String(nextNumber).padStart(4, "0");
 
-        // Return 5-character ID
         return prefix + numberPart;
-        }
-
+    }
 
 
 
@@ -156,24 +154,28 @@ class BLogic {
     }
 
     /**
-     * generateClassId()  Generates a new yoga+class id
-     * format starts with a year and is sequential.  
+     * generateClassId() Generates a new yoga class ID.
+     * Format starts with a year and is sequential.
      * @returns yoga_class_id
      */
     static async generateClassId() {
         const year = new Date().getFullYear();
 
-        const count = await YogaClass.countDocuments({
+        const lastClass = await YogaClass.findOne({
             yoga_class_id: {
-                $gte: year * 10000000,
-                $lt: (year + 1) * 10000000
+                $gte: year * 1000000,
+                $lt: (year + 1) * 1000000
             }
-        });
+        }).sort({ yoga_class_id: -1 });
 
-        const yoga_class_id = year * 1000000 + count + 1;
+        let yoga_class_id = year * 1000000 + 1;
+
+        if (lastClass) {
+            yoga_class_id = Number(lastClass.yoga_class_id) + 1;
+        }
+
         return yoga_class_id;
     }
-
 
     /**
      * sendAttendanceNotification(customer, attendance)
