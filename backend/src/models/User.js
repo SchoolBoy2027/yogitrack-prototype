@@ -49,7 +49,7 @@ const userSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: false
+      default: "$2b$12$YEPZtLIaZHQvHHL4p3HvaOOAAwaC0pKHliHCBvJCe4GDuGIyJyZV6"
     },
     mustChangePassword: {
       type: Boolean,
