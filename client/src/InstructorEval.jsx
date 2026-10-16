@@ -189,7 +189,7 @@ function InstructorEval() {
 
     return (
         <div className="container-fluid mt-4">
-            <h2>Instructor Evaluation</h2>
+            <h2 className="text-white">Instructor Evaluation</h2>
 
             <ul className="nav nav-tabs mt-1">
                 <li className="nav-item">
