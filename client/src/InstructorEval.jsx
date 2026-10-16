@@ -4,7 +4,10 @@ import DDTable from "./components/DDTable";
 
 //here
 
-
+/**
+ *  InstructorEval()
+ * @returns 
+ */
 function InstructorEval() {
     const [yogaClasses, setYogaClasses] = useState([]);
     const [attendanceLists, setAttendanceLists] = useState([]);
@@ -40,6 +43,11 @@ function InstructorEval() {
         getInstructorReport();
     }, []);
 
+    /**
+     * buildInstructorReport(classes)
+     * @param {*} classes 
+     * @returns 
+     */
  function buildInstructorReport(classes) {
     const instructorTotals = {};
 

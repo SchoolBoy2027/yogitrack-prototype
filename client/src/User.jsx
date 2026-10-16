@@ -105,28 +105,27 @@ function CreateUser(action, id) {
       communication_preference: formData.get("communication")
     };
 
-      if (await DBF.duplicateCustomerCheck(user.fname, user.lname)) 
-      {
-        FormHelp.LogIt2("Sending user:", user);
-        try {
-          const response = await fetch("/api/users", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json"
-            },
-            body: JSON.stringify(user)
-          });
+    if (await DBF.duplicateCustomerCheck(user.fname, user.lname)) {
+      FormHelp.LogIt2("Sending user:", user);
+      try {
+        const response = await fetch("/api/users", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(user)
+        });
 
-          const data = await response.json();
+        const data = await response.json();
 
-          FormHelp.LogIt2("Server response:", data);
-          FormHelp.ErrCheck(response);
+        FormHelp.LogIt2("Server response:", data);
+        FormHelp.ErrCheck(response);
 
-        } catch (error) {
-          FormHelp.DisplayErr(error);
-        }
+      } catch (error) {
+        FormHelp.DisplayErr(error);
+      }
     } else {
-          console.log("Create canceled due to duplicate");
+      console.log("Create canceled due to duplicate");
     }
   };
 
@@ -142,7 +141,7 @@ function CreateUser(action, id) {
               <div className="logo"></div>
             </div>
             <div className="col-10">
-              <p className="p-3 fs-3 fw-bold text-white">{`${action.action}`} Instructor</p>
+              <p className="p-3 fs-3 fw-bold text-white">{`${action.action}`} Manager or Instructor</p>
             </div>
             <div className="col-1 fs-3 pr-3 fw-bold text-white  order-dark border-solid" title="Not functional yet">
               <a href="/User/View">
@@ -384,7 +383,7 @@ function UpdateDeleteUser(action) {
                   <div className="logo"></div>
                 </div>
                 <div className="col-10">
-                  <p className="p-3 fs-3 fw-bold text-white">{`${action.action}`} Instructor</p>
+                  <p className="p-3 fs-3 fw-bold text-white">{`${action.action}`} Manager or Instructor</p>
                 </div>
                 <div className="col-1 fs-3 pr-3 fw-bold text-white  order-dark border-solid" title="Not functional yet">
                   <a href="/User/View">
@@ -412,13 +411,13 @@ function UpdateDeleteUser(action) {
 
               <div className="row pb-1 border-bottom border-dark border-solid">
                 <div className="col-2 ">
-                  <label htmlFor="lName" className="formLabel fs-6 fw-bold">Last Name:</label>
+                  <label htmlFor="lName" className="formLabel fs-5 fw-bold">Last Name:</label>
                 </div>
                 <div className="col-4">
                   <input type="text" name="lName" className="formInput" defaultValue={user.lname} />
                 </div>
                 <div className="col-2">
-                  <label htmlFor="fName" className="formLabel fs-6 fw-bold">First Name:</label>
+                  <label htmlFor="fName" className="formLabel fs-5 fw-bold">First Name:</label>
                 </div>
                 <div className="col-4">
                   <input type="text" name="fName" className="formInput" defaultValue={user.fname} />
@@ -491,12 +490,12 @@ function UpdateDeleteUser(action) {
 
               <div className="row p-3 border-bottom border-bg-light  border-solid">
                 <div className="col-2">
-                  <button className="btn btn-dark fs-5 fw-bold" type="button" onClick={deleteUser}>Delete User</button>
+                  <button className="btn btn-dark fs-5 fw-bold delete" type="button" onClick={deleteUser}>Delete User</button>
                 </div>
                 <div className="col-7">
                 </div>
                 <div className="col-2">
-                  <button className="btn btn-dark fs-5 fw-bold" type="button" onClick={updateUser}>Update User</button>
+                  <button className="btn btn-dark fs-5 fw-bold update" type="button" onClick={updateUser}>Update User</button>
                 </div>
               </div>
             </form>

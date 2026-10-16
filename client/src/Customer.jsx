@@ -18,58 +18,7 @@ function getAddRoute() {
     return "/Customer/Add/";
 }
 
-/**
- * ViewCustomer()
- * @returns List of Customers
- */
-
 function ViewCustomer() {
-
-    const [customers, setCustomers] = useState([]);
-
-    useEffect(() => {
-
-        fetch("/api/customers")
-            .then((response) => {
-                console.log("Status:", response.status);
-                console.log("Content-Type:", response.headers.get("content-type"));
-
-                return response.json();
-            })
-            .then((data) => {
-                console.log("Customers:", data);
-                setCustomers(data);
-            })
-            .catch((error) => {
-                console.error("Error fetching customers:", error);
-            });
-
-    }, []);
-
-    return (
-        <>
-            <div className="container-fluid">
-                <div className="container-fluid fs-1 bg-bg-transparent text-white fw-bold left">
-                    <div className="col-12" >
-                        <a href={getAddRoute()}  ><img className="addButton" alt="Missing" src={addButton} title="Add Customer" /> </a>
-                        View Customers
-                    </div>
-                </div>
-
-                <DDTable
-                    data={customers}
-                    actionPath={(row) => `/Customer/Edit/${row.customer_id}`}
-                    actionImage={editButton}
-                />
-
-
-            </div>
-
-        </>
-    );
-}
-
-function ViewCustomer2() {
 
     const [customers, setCustomers] = useState([]);
     const [selectedCustomer, setSelectedCustomer] = useState(null);
@@ -97,7 +46,7 @@ function ViewCustomer2() {
         const customer = customers.find((item) => item.customer_id === customerId);
         setSelectedCustomer(customer);
     };
-//  <div className={selectedCustomer ? "col-8" : "col-12"} style={{ minWidth: 0, overflowX: "auto"}}>
+    //  <div className={selectedCustomer ? "col-8" : "col-12"} style={{ minWidth: 0, overflowX: "auto"}}>
     return (
         <>
             <div className="container-fluid">
@@ -107,48 +56,48 @@ function ViewCustomer2() {
                         View Customers
                     </div>
                 </div>
-            <div className="container-fluid ">
-                <div className="row">
-                <div className={selectedCustomer ? "col-8" : "col-12"} 
-                        style={{
-                            minWidth: 0,
-                            overflowX: selectedCustomer ? "auto" : "hidden",
-                        }}>
-                        <DDTable
-                            data={customers}
-                            actionPath={(row) => `/Customer/Edit/${row.customer_id}`}
-                            actionImage={editButton}
-                            clickableColumns={["customer_id"]}
-                            onCellClick={handleCustomerClick}
-                            hiddenColumns={["packages_purchased"]}
-                        />
-                    </div>
-
-                    {selectedCustomer && (
-                        <div className="col-4 ps-5" style={{ minWidth: 0, overflowX: "auto" }}>
-                            <div className="row fs-5 text-white fw-bold align-items-center">
-                                <div className="col-2 fs-5 text-white fw-bold align-items-left">
-                                    <a
-                                        href="#"
-                                        onClick={(event) => {
-                                            event.preventDefault();
-                                            setSelectedCustomer(null);
-                                        }}
-                                    >
-                                        <img src={btnMinimize} alt="Hide Packages" height={"50px"} width={"50px"} />
-                                    </a>
-                                </div>
-                                Packages for {selectedCustomer.customer_id}
-                            </div>
-
+                <div className="container-fluid ">
+                    <div className="row">
+                        <div className={selectedCustomer ? "col-8" : "col-12"}
+                            style={{
+                                minWidth: 0,
+                                overflowX: selectedCustomer ? "auto" : "hidden",
+                            }}>
                             <DDTable
-                                data={selectedCustomer.packages_purchased || []}
+                                data={customers}
+                                actionPath={(row) => `/Customer/Edit/${row.customer_id}`}
+                                actionImage={editButton}
+                                clickableColumns={["customer_id"]}
+                                onCellClick={handleCustomerClick}
+                                hiddenColumns={["packages_purchased"]}
                             />
                         </div>
-                    )}
+
+                        {selectedCustomer && (
+                            <div className="col-4 ps-5" style={{ minWidth: 0, overflowX: "auto" }}>
+                                <div className="row fs-5 text-white fw-bold align-items-center">
+                                    <div className="col-2 fs-5 text-white fw-bold align-items-left">
+                                        <a
+                                            href="#"
+                                            onClick={(event) => {
+                                                event.preventDefault();
+                                                setSelectedCustomer(null);
+                                            }}
+                                        >
+                                            <img src={btnMinimize} alt="Hide Packages" height={"50px"} width={"50px"} />
+                                        </a>
+                                    </div>
+                                    Packages for {selectedCustomer.customer_id}
+                                </div>
+
+                                <DDTable
+                                    data={selectedCustomer.packages_purchased || []}
+                                />
+                            </div>
+                        )}
+                    </div>
                 </div>
             </div>
-        </div>
         </>
     );
 }
@@ -178,7 +127,7 @@ function CreateCustomer(action, id) {
             communication_preference: formData.get("communication"),
             customer_type: formData.get("type")
         };
-        
+
         if (await DBF.duplicateCustomerCheck(customer.fname, customer.lname)) {
             console.log("Sending customer:", customer);
             let msg = document.getElementById("response");
@@ -206,7 +155,7 @@ function CreateCustomer(action, id) {
                 console.error("Error saving customer:", error);
                 msg.innerHTML = "Could not connect to the server." + error;
             }
-        }else {
+        } else {
             console.log("Create canceled due to duplicate");
         }
     };
@@ -575,12 +524,12 @@ function UpdateDeleteCustomer(action) {
 
                             <div className="row p-3 border-bottom border-bg-light  border-solid">
                                 <div className="col-2">
-                                    <button className="btn btn-dark fs-5 fw-bold" type="button" onClick={deleteCustomer}>Delete Customer</button>
+                                    <button className="btn btn-dark fs-5 fw-bold delete" type="button" onClick={deleteCustomer}>Delete Customer</button>
                                 </div>
                                 <div className="col-7">
                                 </div>
                                 <div className="col-2">
-                                    <button className="btn btn-dark fs-5 fw-bold" type="button" onClick={updateCustomer}>Update Customer</button>
+                                    <button className="btn btn-dark fs-5 fw-bold update" type="button" onClick={updateCustomer}>Update Customer</button>
                                 </div>
                             </div>
                         </form>
@@ -602,10 +551,10 @@ function CustomerAction(action, id) {
             return <UpdateDeleteCustomer action="Update" id={id} />;
 
         case "View":
-            return <ViewCustomer2 />;
+            return <ViewCustomer />;
 
         default:
-            return <ViewCustomer2 />;
+            return <ViewCustomer />;
     }
 }
 

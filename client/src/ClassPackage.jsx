@@ -116,13 +116,13 @@ function ViewClassPackage() {
 function CreateClassPackage(action, id) {
 
   const [formData, setFormData] = useState({
-      class_package_id: "None",
-      cost:"",
-      package_category: "",
-      yoga_class_type: "",
-      number_of_classes: "",
-      days: "",
-      is_active: true
+    class_package_id: "None",
+    cost: "",
+    package_category: "",
+    yoga_class_type: "",
+    number_of_classes: "",
+    days: "",
+    is_active: true
 
   });
 
@@ -243,7 +243,7 @@ function CreateClassPackage(action, id) {
                 id="cost"
                 defaultValue={"20.00"}
                 className="formInput"
-                
+
                 placeholder="$0.00"
                 step="10.00"
               />
@@ -296,7 +296,7 @@ function CreateClassPackage(action, id) {
                 type="text"
                 name="yoga_class_type"
                 id="yoga_class_type"
-
+                title="General or Special only!"
                 className="formInput"
               />
             </div>
@@ -595,6 +595,7 @@ function UpdateDeleteClassPackage(action) {
                     id="yoga_class_type"
                     defaultValue={class_package.yoga_class_type}
                     className="formInput"
+                    title="General or Special only!"
                   />
                 </div>
 

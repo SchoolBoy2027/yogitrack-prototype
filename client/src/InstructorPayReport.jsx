@@ -126,7 +126,7 @@ function InstructorPayReport() {
                     </div>
 
                     <div className="col-md-9 d-flex align-items-end">
-                        <h4 className="mb-1">
+                        <h4 className="mb-1 text-white">
                             Payroll for {reportMonth}
                         </h4>
                     </div>
@@ -148,20 +148,20 @@ function InstructorPayReport() {
                         <div className="row mt-3">
 
                             <div className="col-md-4">
-                                <div className="border rounded p-3">
-                                    <strong>Classes Taught:</strong> {totalClasses}
+                                <div className="border rounded p-3 fw-bold">
+                                    Classes Taught: {totalClasses}
                                 </div>
                             </div>
 
                             <div className="col-md-4">
                                 <div className="border rounded p-3">
-                                    <strong>Student Attendances:</strong> {totalStudents}
+                                    Student Attendances: {totalStudents}
                                 </div>
                             </div>
 
                             <div className="col-md-4">
                                 <div className="border rounded p-3">
-                                    <strong>Total Payroll:</strong>{" "}
+                                    Total Payroll:{" "}
                                     {totalPayroll.toLocaleString("en-US", {
                                         style: "currency",
                                         currency: "USD"
