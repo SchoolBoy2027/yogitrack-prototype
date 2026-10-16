@@ -6,3 +6,5 @@ node_modules/
 .gitignore
 .env
 generatePassword.js 
+Coyote.md
+gotofolder.bat
