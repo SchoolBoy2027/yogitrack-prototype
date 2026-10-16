@@ -163,7 +163,7 @@ function InstructorEval() {
     function lastWeek() {
         return (
             <div className="tab-pane active">
-                <h4>Classes Taught Last Week</h4>
+                <h4 className="text-white fs-5">Classes Taught Last Week</h4>
                 <DDTable data={filterClasses("lastWeek")} />
             </div>
         );
@@ -172,8 +172,8 @@ function InstructorEval() {
     function customerSatisfaction() {
         return (
             <div className="tab-pane active">
-                <h4>Customer Satisfaction</h4>
-                <p>Customer satisfaction reporting will be added later.</p>
+                <h2 className="text-white fs-5">Customer Satisfaction</h2>
+                <p className="text-white fs-5">Customer satisfaction reporting will be added later.</p>
             </div>
         );
     }
@@ -181,15 +181,15 @@ function InstructorEval() {
     function coworkerFeedback() {
         return (
             <div className="tab-pane active">
-                <h4>Coworker Feedback</h4>
-                <p>Coworker feedback reporting will be added later.</p>
+                <h2 className="text-white fs-5">Coworker Feedback</h2>
+                <p className="text-white fs-5">Coworker feedback reporting will be added later.</p>
             </div>
         );
     }
 
     return (
         <div className="container-fluid mt-4">
-            <h2 className="text-white">Instructor Evaluation</h2>
+            <h2 className="text-white fs-5">Instructor Evaluation</h2>
 
             <ul className="nav nav-tabs mt-1">
                 <li className="nav-item">
